@@ -60,27 +60,19 @@ void		exit_shell(t_shell *shell, int err_code)
 int			main(void)
 {
 	t_shell	*shell;
-	int		set;
-	char	c;
 
-	shell = (t_shell *)malloc(sizeof(t_shell));
-	if ((set = set_termcap(shell)) < 0)
+	shell = initialize_structs();
+	if (set_termcap(shell) < 0)
 		exit_shell(shell, 1);
 	while (1)
 	{
 		setup(shell);
-		while ((c = ft_getchar_mod(0, &shell->cmd)))
-			if(terms_esc(c, shell) == 0 && ((c > 8 && c < 14)
-						|| (c > 31 && c < 127)))
-				insert_char(&c);
+		read_and_parse(shell);
 		if (shell->cmd && command(shell) == 1)
 			break ;
 		shell->cmd ? free(shell->cmd) : 0;
 		ft_putstr("\n\r");
 	}
-	if (set == 1)
-		if (end_termcap(shell) < 0)
-			exit_shell(shell, -1);
-	shell ? free(shell) : 0;
+	cleanup(shell);
 	return (0);
 }

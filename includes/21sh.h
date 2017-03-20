@@ -47,11 +47,19 @@
 # define INSERT_CHAR	tputs(tgetstr("ic", NULL), 1, ft_putchar)
 # define INSRT_MODE_OFF	tputs(tgetstr("ei", NULL), 1, ft_putchar)
 
+typedef struct			s_history
+{
+	char				*hist_cmd;
+	struct s_history	*prev;
+	struct s_history	*next;
+}						t_history;
+
 typedef struct		s_shell
 {
 	struct termios	old;
 	char			*cmd;
 	char			**path;
+	t_history		*history;
 }					t_shell;
 
 int		command(t_shell *shell);
@@ -62,5 +70,10 @@ void	exit_shell(t_shell *shell, int err_code);
 void	setup(t_shell *shell);
 void	insert_char(char *c);
 void	delete_char(t_shell *shell);
+void	cleanup(t_shell *shell);
+void	add_to_history(t_shell *shell);
+void	read_and_parse(t_shell *shell);
+void	disp_prompt(void);
+t_shell	*initialize_structs(void);
 
 #endif

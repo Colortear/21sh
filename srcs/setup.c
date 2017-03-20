@@ -30,3 +30,15 @@ void	setup(t_shell *shell)
 	disp_prompt();
 	shell->path = ft_strsplit(getenv("PATH"), ':');
 }
+
+t_shell	*initialize_structs(void)
+{
+	t_shell	*shell;
+
+	shell = (t_shell *)malloc(sizeof(t_shell));
+	shell->history = (t_history *)malloc(sizeof(t_history));
+	shell->history->prev = NULL;
+	shell->history->hist_cmd = ft_strnew(0);
+	shell->history->next = NULL;
+	return (shell);
+}

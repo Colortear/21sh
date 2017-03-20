@@ -18,3 +18,14 @@ int		command(t_shell *shell)
 		return (1);
 	return (0);
 }
+
+void	read_and_parse(t_shell *shell)
+{
+	char	c;
+
+	while ((c = ft_getchar_mod(0, &shell->cmd)))
+		if (terms_esc(c, shell) == 0 && ((c > 8 && c < 14)
+					|| (c > 31 && c < 127)))
+			insert_char(&c);
+	add_to_history(shell);
+}
