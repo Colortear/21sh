@@ -6,7 +6,7 @@
 /*   By: wdebs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 22:58:21 by wdebs             #+#    #+#             */
-/*   Updated: 2017/03/14 17:47:06 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/17 15:28:12 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct		s_list
 typedef struct		s_tree
 {
 	int				data;
-	struct	s_tree	*left;
-	struct	s_tree	*right;
-}					b_tree;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}					t_tree;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -104,11 +104,17 @@ int					grab_line(const int fd, char **line);
 int					ft_setenv(const char *name, const char *value);
 int					ft_unsetenv(const char *name);
 
-int					search_bst(b_tree *node, int data);
-b_tree				*new_node(int data);
-b_tree				*insert_bst(b_tree *node, int data);
-b_tree				*create_bst(int *arr, int start, int size);
+int					search_bst(t_tree *node, int data);
+t_tree				*new_node(int data);
+t_tree				*insert_bst(t_tree *node, int data);
+t_tree				*create_bst(int *arr, int start, int size);
 
-char				ft_getchar_mod(int fd, char **line);
+char				ft_getchar_mod(int fd);
+char				*ft_insrtchar(char *str, int place, char c);
+char				*ft_delchar(char *str, int place);
+size_t				ft_strspn(const char *s, const char *accept);
+char				**ft_realloc2(char **arr);
+char				**ft_tdnew(int size);
+int					ft_twodlen(char **arr);
 
 #endif

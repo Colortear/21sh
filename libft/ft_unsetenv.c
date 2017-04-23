@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:30:28 by wdebs             #+#    #+#             */
-/*   Updated: 2017/02/28 17:28:00 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/03 15:45:32 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int		ft_unsetenv(const char *name)
 	sp = ep;
 	if (name == NULL || name[0] == '\0' || ft_strchr(name, '=') != NULL)
 		return (-1);
-	while (*ep != NULL )
+	while (*ep != NULL)
 	{
-
 		if (ft_strncmp(*ep, name, len) == 0 && (*ep)[len] == '=')
 		{
 			while (*sp != NULL)

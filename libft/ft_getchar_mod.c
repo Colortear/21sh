@@ -12,23 +12,22 @@
 
 #include "libft.h"
 
-char	ft_getchar_mod(int fd, char **line)
+char	ft_getchar_mod(int fd)
 {
-	char	*tmp;
-	char	character;
-	int		size;
+	char		character;
+	static int	quote = 0;
 
-	if (!read(fd, &character, 1) || character == 13)
-			return (0);
-	if (character < 32 || character > 126)
-		return (character);
-	size = *line ? ft_strlen(*line) : 0;
-	tmp = ft_strnew(size + 1);
-	if (*line)
-		ft_strcpy(tmp, *line);
-	tmp[size] = character;
-	if (*line)
-		free(*line);
-	*line = tmp;
+	if (!read(fd, &character, 1))
+		return (0);
+	if (character == 34 && quote == 1)
+		quote = 0;
+	else if (character == 44 && quote == 2)
+		quote = 0;
+	else if (character == 34 && quote == 0)
+		quote = 1;
+	else if (character == 44 && quote == 0)
+		quote = 2;
+	else if (character == 13 && quote == 0)
+		return (0);
 	return (character);
 }

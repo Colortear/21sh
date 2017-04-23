@@ -6,13 +6,13 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 17:55:26 by wdebs             #+#    #+#             */
-/*   Updated: 2017/03/04 00:09:59 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/03 16:53:23 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		search_bst(b_tree *node, int data)
+int		search_bst(t_tree *node, int data)
 {
 	if (!node)
 		return (0);
@@ -25,18 +25,18 @@ int		search_bst(b_tree *node, int data)
 	return (0);
 }
 
-b_tree	*new_node(int data)
+t_tree	*new_node(int data)
 {
-	b_tree *new_node;
-	
-	new_node = (b_tree *)malloc(sizeof(b_tree));
+	t_tree *new_node;
+
+	new_node = (t_tree *)malloc(sizeof(t_tree));
 	new_node->data = data;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);
 }
 
-b_tree	*insert_bst(b_tree *node, int data)
+t_tree	*insert_bst(t_tree *node, int data)
 {
 	if (node == NULL)
 		node = new_node(data);
@@ -47,9 +47,9 @@ b_tree	*insert_bst(b_tree *node, int data)
 	return (node);
 }
 
-b_tree	*create_bst(int	*arr, int start, int size)
+t_tree	*create_bst(int *arr, int start, int size)
 {
-	b_tree	*root;
+	t_tree	*root;
 	int		mid;
 
 	root = NULL;

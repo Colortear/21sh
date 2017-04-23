@@ -6,7 +6,7 @@
 #    By: wdebs <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/25 21:05:50 by wdebs             #+#    #+#              #
-#    Updated: 2017/03/07 19:35:11 by wdebs            ###   ########.fr        #
+#    Updated: 2017/04/17 15:28:50 by wdebs            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_itoa.c ft_lstnew.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c \
 	  ft_lstmap.c ft_swap.c ft_isupper.c ft_islower.c ft_isblank.c ft_strcspn.c \
 	  ft_strtrim.c grab_line.c ft_setenv.c ft_unsetenv.c b_tree.c \
-	  ft_getchar_mod.c \
+	  ft_getchar_mod.c ft_insrtchar.c ft_delchar.c ft_strspn.c ft_tdnew.c \
+	  ft_reallloc2.c ft_twodlen.c \
 
 OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 	  ft_isdigit.o ft_isprint.o ft_memccpy.o ft_memchr.o ft_memcmp.o \
@@ -43,7 +44,8 @@ OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 	  ft_itoa.o ft_lstnew.o ft_lstadd.o ft_lstdel.o ft_lstdelone.o ft_lstiter.o \
 	  ft_lstmap.o ft_swap.o ft_isupper.o ft_islower.o ft_isblank.o ft_strcspn.o \
 	  ft_strtrim.o grab_line.o ft_setenv.o ft_unsetenv.o b_tree.o \
-	  ft_getchar_mod.o \
+	  ft_getchar_mod.o ft_insrtchar.o ft_delchar.o ft_strspn.o ft_tdnew.o \
+	  ft_realloc2.o ft_twodlen.o \
 
 CFLAGS = -Wall -Wextra -Werror -c
 

@@ -1,8 +1,18 @@
-/*42 header goes here*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/03 16:36:22 by wdebs             #+#    #+#             */
+/*   Updated: 2017/04/22 17:07:04 by wdebs            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "21sh.h"
+#include "twsh.h"
 
-void	disp_prompt(void)
+void		disp_prompt(void)
 {
 	char	*home_path;
 	size_t	home_len;
@@ -20,25 +30,15 @@ void	disp_prompt(void)
 	else
 		ft_putstr(current);
 	ft_putstr(" $ ");
-	current = NULL;
 	free(current);
 }
 
-void	setup(t_shell *shell)
+t_history	*setup(t_shell *shell, t_history *hist)
 {
-	shell->cmd = NULL;
 	disp_prompt();
+	shell->x = 0;
+	shell->path = shell->path ? freetwod(shell->path) : 0;
 	shell->path = ft_strsplit(getenv("PATH"), ':');
-}
-
-t_shell	*initialize_structs(void)
-{
-	t_shell	*shell;
-
-	shell = (t_shell *)malloc(sizeof(t_shell));
-	shell->history = (t_history *)malloc(sizeof(t_history));
-	shell->history->prev = NULL;
-	shell->history->hist_cmd = ft_strnew(0);
-	shell->history->next = NULL;
-	return (shell);
+	hist = init_hist(shell, hist);
+	return (hist);
 }
