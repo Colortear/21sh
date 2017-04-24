@@ -61,7 +61,6 @@ void	run_cd(char **path)
 	{
 		copy = path[1][0] == '~' ? ft_strjoin(getenv("HOME"), path[1]) :
 			ft_strdup(path[1]);
-		ft_putstr(copy);
 		if (chdir(copy) < 0)
 			ft_putstr("cd: no such file or directory\n\r");
 	}
