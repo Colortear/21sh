@@ -26,6 +26,7 @@
 # include <curses.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <paths.h>
 # include <sys/param.h>
 # include <sys/select.h>

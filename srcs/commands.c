@@ -35,33 +35,26 @@ int			commands_length(int type, t_cmd *cmds)
 void		add_file_type(t_cmd **cmds, int type, char *tmp)
 {
 	int		len;
-	int i = 0;
 
 	len = commands_length(type, *cmds);
-	if (type == RIGHT_REDIR && ft_realloc2((*cmds)->out) &&
+	if (type == RIGHT_REDIR && ((*cmds)->out = ft_realloc2((*cmds)->out)) &&
 			((*cmds)->out_ord = 0))
 		(*cmds)->out[len] = ft_strdup(tmp);
-	else if (type == LEFT_REDIR && ft_realloc2((*cmds)->in) &&
+	else if (type == LEFT_REDIR && ((*cmds)->in = ft_realloc2((*cmds)->in)) &&
 			((*cmds)->in_ord = 0))
 		(*cmds)->in[len] = ft_strdup(tmp);
-	else if (type == RIGHT_DOUBLE && ft_realloc2((*cmds)->append) &&
+	else if (type == RIGHT_DOUBLE &&
+			((*cmds)->append = ft_realloc2((*cmds)->append)) &&
 			((*cmds)->out_ord = 1))
 		(*cmds)->append[len] = ft_strdup(tmp);
-	else if (type == LEFT_DOUBLE && ft_realloc2((*cmds)->heredoc) &&
+	else if (type == LEFT_DOUBLE &&
+			((*cmds)->heredoc = ft_realloc2((*cmds)->heredoc)) &&
 			((*cmds)->in_ord = 1))
 		(*cmds)->heredoc[len] = ft_strdup(tmp);
-	else if (type == AMPERSAND && ft_realloc2((*cmds)->aggs))
+	else if (type == AMPERSAND && ((*cmds)->aggs = ft_realloc2((*cmds)->aggs)))
 		(*cmds)->aggs[len] = ft_strdup(tmp);
-	else if (type == NORMAL && ft_realloc2((*cmds)->args))
+	else if (type == NORMAL && ((*cmds)->args = ft_realloc2((*cmds)->args)))
 		(*cmds)->args[len] = ft_strdup(tmp);
-	while ((*cmds)->args[i]) {
-		ft_putstr("args[");
-		ft_putnbr(i);
-		ft_putstr("] is: ");
-		ft_putstr((*cmds)->args[i]);
-		write(1, " ", 1);
-		i++;
-	}
 }
 
 static int	redirections(char **cmd, t_cmd **cmds)

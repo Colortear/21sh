@@ -14,9 +14,6 @@
 
 int		openfile(char *file, int redir)
 {
-	int		fd;
-
-	fd = 0;
 	if (redir == RIGHT_REDIR)
 		return (open(file, O_WRONLY | O_TRUNC | O_CREAT, 0600));
 	else if (redir == RIGHT_DOUBLE)
@@ -56,7 +53,6 @@ static void	duplications(t_cmd *cmds)
 
 static int	path_cmd(char **cmd, int check)
 {
-	extern char	**environ;
 	char		**paths;
 	int			i;
 	char		*tmp;

@@ -15,11 +15,9 @@
 char	**twsplit(char *str)
 {
 	int		i;
-	int		j;
 	char	**new;
 
 	i = 0;
-	j = 0;
 	new = NULL;
 	while (str && str[i])
 	{
