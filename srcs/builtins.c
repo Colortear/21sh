@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "twsh.h"
-// fix echo
 
 void	run_env(void)
 {
@@ -28,22 +27,19 @@ void	run_env(void)
 
 void	run_echo(char **args)
 {
-	extern char	**environ;
 	int			i;
-	int			j;
+	char		*tmp;
 
-	i = -1;
+	i = 0;
+	tmp = NULL;
 	while (args[++i])
 	{
-		j = -1;
-		while (args[i][++j])
-		{
-			write(1, &args[i][j], 1);
-			if (args[i][j] == '\n')
-				write(1, "\r", 1);
-		}
-		if (args[i + 1] != 0)
-			write(1, " ", 1);
+		if (args[i][0] == '$' && (tmp = getenv(args[i] + 1)))
+			ft_putstr(tmp);
+		else
+			ft_putstr(args[i]);
+		write(1, " ", 1);
+		tmp = NULL;
 	}
 	write(1, "\n\r", 2);
 }

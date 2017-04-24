@@ -30,13 +30,19 @@ void	run(t_cmd *cmds, int fd[2], int bin, int fd_in)
 {
 	extern char	**environ;
 
+	if (cmds->next)
+	{
+		dup2(fd[1], 1);
+		close(fd[0]);
+	}
 	if (bin == BIN)
+	{
 		run_builtins(cmds);
+		exit(1);
+	}
 	else if (!access(cmds->cmd, R_OK || X_OK))
 	{
 		dup2(fd_in, 0);
-		cmds->next ? dup2(fd[1], 1) : 0;
-		cmds->next ? close(fd[0]) : 0;
 		execve(cmds->cmd, cmds->args, environ);
 	}
 	else
