@@ -14,13 +14,16 @@
 
 int		openfile(char *file, int redir)
 {
+	int		fd;
+
+	fd = 0;
 	if (redir == RIGHT_REDIR)
-		return (open(file, O_WRONLY | O_TRUNC | O_CREAT, 0600));
+		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0600);
 	else if (redir == RIGHT_DOUBLE)
-		return (open(file, O_WRONLY | O_APPEND | O_CREAT, 0600));
+		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0600);
 	else if (redir == LEFT_REDIR)
-		return (open(file, O_RDONLY));
-	return (0);
+		fd = open(file, O_RDONLY);
+	return (fd);
 }
 
 static void	duplications(t_cmd *cmds)
@@ -32,22 +35,22 @@ static void	duplications(t_cmd *cmds)
 	i = -1;
 	while (cmds->out && cmds->out[++i] &&
 			(fd = openfile(cmds->out[i], RIGHT_REDIR)))
-		if (!cmds->out_ord && dup2(fd, 1) != -1)
+		if (cmds->out_ord == 2 && dup2(fd, 1) != -1)
 			close(fd);
 	i = -1;
 	while (cmds->in && cmds->in[++i] &&
 			(fd = openfile(cmds->in[i], LEFT_REDIR)))
-		if (!cmds->in_ord && dup2(fd, 0) != -1)
+		if (cmds->in_ord == 2 && dup2(fd, 0) != -1)
 			close(fd);
 	i = -1;
 	while (cmds->append && cmds->append[++i] &&
 			(fd = openfile(cmds->append[i], RIGHT_DOUBLE)))
-		if (cmds->out_ord && dup2(fd, 0) != -1)
+		if (cmds->out_ord == 1 && dup2(fd, 0) != -1)
 			close(fd);
 	i = -1;
 	while (cmds->heredoc && cmds->heredoc[++i] &&
 			(fd = openfile(cmds->heredoc[i], LEFT_DOUBLE)))
-			if (cmds->in_ord && dup2(fd, 1) != -1)
+			if (cmds->in_ord == 1 && dup2(fd, 1) != -1)
 			close(fd);
 }
 

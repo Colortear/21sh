@@ -38,10 +38,10 @@ void		add_file_type(t_cmd **cmds, int type, char *tmp)
 
 	len = commands_length(type, *cmds);
 	if (type == RIGHT_REDIR && ((*cmds)->out = ft_realloc2((*cmds)->out)) &&
-			((*cmds)->out_ord = 0))
+			((*cmds)->out_ord = 2))
 		(*cmds)->out[len] = ft_strdup(tmp);
 	else if (type == LEFT_REDIR && ((*cmds)->in = ft_realloc2((*cmds)->in)) &&
-			((*cmds)->in_ord = 0))
+			((*cmds)->in_ord = 2))
 		(*cmds)->in[len] = ft_strdup(tmp);
 	else if (type == RIGHT_DOUBLE &&
 			((*cmds)->append = ft_realloc2((*cmds)->append)) &&
@@ -68,6 +68,7 @@ static int	redirections(char **cmd, t_cmd **cmds)
 	ft_strcmp(cmd[i], "exit") == 0 ? len = -1 : 0;
 	while (cmd[++i] && len != -1)
 	{
+		tmp = NULL;
 		if (ft_strcmp(cmd[i], ">") == 0 && (type = RIGHT_REDIR))
 			tmp = cmd[++i];
 		else if (ft_strcmp(cmd[i], "<") == 0 && (type = LEFT_REDIR))
@@ -80,7 +81,7 @@ static int	redirections(char **cmd, t_cmd **cmds)
 			tmp = cmd[i];
 		else if ((type = NORMAL))
 			tmp = cmd[i];
-		add_file_type(cmds, type, tmp);
+		tmp ? add_file_type(cmds, type, tmp) : 0;
 	}
 	return (len);
 }
@@ -102,7 +103,7 @@ int			parse_pipes(char *str)
 	{
 		commands = link_cmds(commands);
 		cmds = twsplit(piped[i]);
-		commands->cmd = cmds ? ft_strdup(cmds[i]) : NULL;
+		commands->cmd = cmds ? ft_strdup(cmds[0]) : NULL;
 		if (cmds && commands->cmd && ft_realloc2(commands->args))
 			commands->args[0] = ft_strdup(cmds[0]);
 		if (cmds && redirections(cmds, &commands) == -1)
