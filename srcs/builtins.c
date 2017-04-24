@@ -59,7 +59,6 @@ void	run_cd(char **path)
 		chdir(getenv("OLDPWD"));
 	else if (path && path[1])
 	{
-		write(1, "FUUUCCKKCKKKCKK", 15);
 		copy = path[1][0] == '~' ? ft_strjoin(getenv("HOME"), path[1]) :
 			ft_strdup(path[1]);
 		ft_putstr(copy);
