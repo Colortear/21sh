@@ -21,7 +21,7 @@ char	**twsplit(char *str)
 	new = NULL;
 	while (str && str[i])
 	{
-		if ((str[i] == 39 || str[i] == 34) && i++)
+		if ((str[i] == 39 || str[i] == 34))
 			new = split_quotes(str, new, &i);
 		else if (str[i] != ' ' && str[i] != '\t')
 			new = extract_cmd(str, new, &i);

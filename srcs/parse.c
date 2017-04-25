@@ -73,7 +73,7 @@ t_history	*read_and_parse(t_shell *shell, t_history *hist)
 
 	hist_copy = copy_history(hist);
 	while ((c = ft_getchar_mod(0)))
-		if (terms_esc(c, shell, &hist_copy) == 0 && ((c > 8 && c < 14)
+		if (terms_esc(c, shell, &hist_copy) == 0 && ((c > 9 && c < 14)
 					|| (c > 31 && c < 127)))
 			insert_char(&c, shell, hist_copy);
 	if (hist_copy->cmd)

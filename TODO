@@ -1,0 +1,9 @@
+TODO:
+		-Implement heredoc, possibly just on one line, ignoring return
+			until condition met.
+		-Implement cut, copy, and paste.
+		-word jumping in line.
+		-Make twsplit handle both quote types and extensions.
+		-Implement ctrl + c and ctrl + d signal handling.
+		-Implement fd aggregation(correct jargon?)
+

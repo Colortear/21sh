@@ -45,12 +45,12 @@ static void	duplications(t_cmd *cmds)
 	i = -1;
 	while (cmds->append && cmds->append[++i] &&
 			(fd = openfile(cmds->append[i], RIGHT_DOUBLE)))
-		if (cmds->out_ord == 1 && dup2(fd, 0) != -1)
+		if (cmds->out_ord == 1 && dup2(fd, 1) != -1)
 			close(fd);
 	i = -1;
 	while (cmds->heredoc && cmds->heredoc[++i] &&
 			(fd = openfile(cmds->heredoc[i], LEFT_DOUBLE)))
-			if (cmds->in_ord == 1 && dup2(fd, 1) != -1)
+			if (cmds->in_ord == 1 && dup2(fd, 0) != -1)
 			close(fd);
 }
 

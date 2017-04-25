@@ -38,7 +38,8 @@ void	run_echo(char **args)
 			ft_putstr(tmp);
 		else
 			ft_putstr(args[i]);
-		write(1, " ", 1);
+		if(args[i + 1])
+			write(1, " ", 1);
 		tmp = NULL;
 	}
 	write(1, "\n\r", 2);

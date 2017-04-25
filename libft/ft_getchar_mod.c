@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	ft_getchar_mod(int fd)
+/*char	ft_getchar_mod(int fd)
 {
 	char		character;
 	static int	quote = 0;
@@ -30,4 +30,24 @@ char	ft_getchar_mod(int fd)
 	else if (character == 13 && quote == 0)
 		return (0);
 	return (character);
+}*/
+
+char	ft_getchar_mod(int fd)
+{
+	char		c;
+	static char	quote = 0;
+
+	if (!read(fd, &c, 1))
+		return (0);
+	if (quote == 0 && (c == 34 || c == 39 || c == 96 ||
+				c == 40 || c == 91 || c == 123))
+		quote = c;
+	else if (quote && c == quote && (c == 34 || c == 39 || c == 96))
+		quote = 0;
+	else if (quote && (quote == 40 || quote == 91 || quote == 123) &&
+				(c == 41 || c == 93 || c == 125))
+		quote = 0;
+	else if (c == 13 && quote == 0)
+		return (0);
+	return (c);
 }

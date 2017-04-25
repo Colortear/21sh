@@ -22,7 +22,8 @@ void		disp_prompt(void)
 	home_path = getenv("HOME");
 	home_len = ft_strlen(home_path);
 	current = getcwd(NULL, 0);
-	if (ft_strncmp(home_path, current, home_len) == 0)
+	if (ft_strlen(current) >= home_len &&
+			ft_strncmp(home_path, current, home_len) == 0)
 	{
 		ft_putchar('~');
 		ft_putstr(current + home_len);
