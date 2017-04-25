@@ -21,7 +21,8 @@ char	**twsplit(char *str)
 	new = NULL;
 	while (str && str[i])
 	{
-		if ((str[i] == 39 || str[i] == 34))
+		if (str[i] == 34 || str[i] == 39 || str[i] == 96 ||
+				str[i] == 40 || str[i] == 91 || str[i] == 123)
 			new = split_quotes(str, new, &i);
 		else if (str[i] != ' ' && str[i] != '\t')
 			new = extract_cmd(str, new, &i);
@@ -41,20 +42,22 @@ char	**split_quotes(char *str, char **new, int *i)
 	j = 0;
 	k = 0;
 	size = *i;
-	quote = str[*i];
+	quote = check_expansions(str[*i]);
 	new = ft_realloc2(new);
-	while (new[j])
+	while (new && new[j])
 		j++;
+	while (str[size] == quote)
+		size++;
 	while (str[size] && str[size] != quote)
 		size++;
 	new[j] = ft_strnew(size - *i);
-	while (*i < size)
+	while (++(*i) < size)
 	{
 		new[j][k] = str[*i];
 		k++;
-		(*i)++;
 	}
-	(*i)++;
+	while (str[*i] == quote)
+		(*i)++;
 	return (new);
 }
 
@@ -80,4 +83,15 @@ char	**extract_cmd(char *str, char **new, int *i)
 		(*i)++;
 	}
 	return (new);
+}
+
+char	check_expansions(char exp)
+{
+	if (exp == 40)
+		exp = 41;
+	else if (exp == 91)
+		exp = 93;
+	else if (exp == 123)
+		exp = 125;
+	return (exp);
 }

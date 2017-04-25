@@ -157,5 +157,6 @@ void					run_env(void);
 void					run_echo(char **args);
 void					run_cd(char **path);
 t_cmd					*link_cmds(t_cmd *cmds);
+char					check_expansions(char exp);
 
 #endif
