@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 22:07:45 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 18:46:38 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/25 22:21:31 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	run(t_cmd *cmds, int fd[2], int bin, int fd_in)
 {
 	extern char	**environ;
 
+	signal(SIGINT, SIG_DFL);
 	if (cmds->next)
 	{
 		dup2(fd[1], 1);

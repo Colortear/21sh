@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:23:51 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 17:12:20 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/25 22:11:02 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			main(void)
 		exit_shell(hist, shell, 1);
 	while (1)
 	{
+		signal(SIGINT, SIG_IGN);
 		hist = setup(shell, hist);
 		hist = read_and_parse(shell, hist);
 		ft_putstr("\n\r");
