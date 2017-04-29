@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 15:38:39 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 19:56:27 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/28 22:33:29 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int			parse_pipes(char *str)
 	piped = ft_strsplit(str, '|');
 	cmds = NULL;
 	commands = NULL;
-	while (piped[++i] && check == 0)
+	while (piped[++i] && check_spaces(piped[i]) && check == 0)
 	{
 		commands = link_cmds(commands);
 		cmds = twsplit(piped[i]);

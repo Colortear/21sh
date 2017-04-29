@@ -6,7 +6,7 @@
 /*   By: wdebs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 22:58:21 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/17 15:28:12 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/28 18:21:35 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ size_t				ft_strspn(const char *s, const char *accept);
 char				**ft_realloc2(char **arr);
 char				**ft_tdnew(int size);
 int					ft_twodlen(char **arr);
+char				**ft_freetwod(char **str);
 
 #endif

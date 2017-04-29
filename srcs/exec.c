@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 17:17:59 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/28 20:59:20 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static void	duplications(t_cmd *cmds)
 
 	fd = 0;
 	i = -1;
+	while (cmds->heredoc && cmds->heredoc[++i])
+		if (!cmds->heredoc[i + 1] && (fd = heredoc(cmds, cmds->heredoc[i])) &&
+				dup2(fd, 0) != -1)
+			close(fd);
+	i = -1;	
 	while (cmds->out && cmds->out[++i] &&
 			(fd = openfile(cmds->out[i], RIGHT_REDIR)))
 		if (cmds->out_ord == 2 && dup2(fd, 1) != -1)
@@ -46,11 +51,6 @@ static void	duplications(t_cmd *cmds)
 	while (cmds->append && cmds->append[++i] &&
 			(fd = openfile(cmds->append[i], RIGHT_DOUBLE)))
 		if (cmds->out_ord == 1 && dup2(fd, 1) != -1)
-			close(fd);
-	i = -1;
-	while (cmds->heredoc && cmds->heredoc[++i] &&
-			(fd = openfile(cmds->heredoc[i], LEFT_DOUBLE)))
-			if (cmds->in_ord == 1 && dup2(fd, 0) != -1)
 			close(fd);
 }
 

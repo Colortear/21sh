@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 14:49:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/25 22:12:20 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/04/28 20:53:16 by wdebs            ###   ########.fr       */
 /*   Updated: 2017/04/17 20:52:22 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -89,6 +89,7 @@ typedef struct			s_cmd
 	int					std_out;
 	int					std_err;
 	int					pipe_in;
+	char				*hds;
 }						t_cmd;
 
 typedef struct			s_history
@@ -158,5 +159,7 @@ void					run_echo(char **args);
 void					run_cd(char **path);
 t_cmd					*link_cmds(t_cmd *cmds);
 char					check_expansions(char exp);
+char					heredoc_manage(char *key, int len);
+int						heredoc(t_cmd *cmds, char *key);
 
 #endif
