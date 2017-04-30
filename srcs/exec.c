@@ -34,8 +34,8 @@ static void	duplications(t_cmd *cmds)
 	fd = 0;
 	i = -1;
 	while (cmds->heredoc && cmds->heredoc[++i])
-		if (!cmds->heredoc[i + 1] && (fd = heredoc(cmds, cmds->heredoc[i])) &&
-				dup2(fd, 0) != -1)
+		if (!cmds->heredoc[i + 1] && cmds->in_ord == 1
+				&& (fd = heredoc(cmds, cmds->heredoc[i])) && dup2(fd, 0) != -1)
 			close(fd);
 	i = -1;	
 	while (cmds->out && cmds->out[++i] &&
