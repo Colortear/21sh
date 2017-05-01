@@ -34,8 +34,8 @@ static void	duplications(t_cmd *cmds)
 	fd = 0;
 	i = -1;
 	while (cmds->heredoc && cmds->heredoc[++i])
-		if (!cmds->heredoc[i + 1] && cmds->in_ord == 1
-				&& (fd = heredoc(cmds, cmds->heredoc[i])) && dup2(fd, 0) != -1)
+		if (!cmds->heredoc[i + 1] && cmds->in_ord == 1 &&
+				(fd = heredoc(cmds, cmds->heredoc[i])) && dup2(fd, 0) != -1)
 			close(fd);
 	i = -1;	
 	while (cmds->out && cmds->out[++i] &&
@@ -111,9 +111,9 @@ void	run_execs(t_cmd *cmds)
 	tmp = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
+		cmds->aggs ? ampersand(cmds) : 0;
 		duplications(cmds);
-		if (exec(cmds, bin) == -1)
-			bin = 0;
+		bin = exec(cmds, bin) == -1 ? 0 : bin;
 		tmp = cmds;
 		cmds = next_cmd(cmds);
 	}

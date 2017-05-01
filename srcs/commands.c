@@ -97,8 +97,8 @@ int			parse_pipes(char *str)
 	i = -1;
 	check = 0;
 	piped = ft_strsplit(str, '|');
-	cmds = NULL;
 	commands = NULL;
+	cmds = NULL;
 	while (piped[++i] && check_spaces(piped[i]) && check == 0)
 	{
 		commands = link_cmds(commands);

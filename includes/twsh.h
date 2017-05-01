@@ -70,6 +70,8 @@
 # define BIN			1
 # define PATH			2
 # define LOCAL			3
+# define AMP_LEFT		1
+# define AMP_RIGHT		2
 
 typedef struct			s_cmd
 {
@@ -161,5 +163,9 @@ t_cmd					*link_cmds(t_cmd *cmds);
 char					check_expansions(char exp);
 char					heredoc_manage(char *key, int len);
 int						heredoc(t_cmd *cmds, char *key);
+void					ampersand(t_cmd *cmds);
+int						ampersand_type(char **amp);
+int						isnum(char *tmp, int size);
+void					amp(char **tmp, int type);
 
 #endif
