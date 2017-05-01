@@ -92,25 +92,25 @@ int			parse_pipes(char *str)
 	char	**piped;
 	char	**cmds;
 	int		check;
-	t_cmd	*commands;
+	t_cmd	*c;
 
 	i = -1;
 	check = 0;
 	piped = ft_strsplit(str, '|');
-	commands = NULL;
+	c = NULL;
 	cmds = NULL;
 	while (piped[++i] && check_spaces(piped[i]) && check == 0)
 	{
-		commands = link_cmds(commands);
-		cmds = twsplit(piped[i]);
-		commands->cmd = cmds ? ft_strdup(cmds[0]) : NULL;
-		if (cmds && commands->cmd && ft_realloc2(commands->args))
-			commands->args[0] = ft_strdup(cmds[0]);
-		if (cmds && redirections(cmds, &commands) == -1)
+		if ((c = link_cmds(c)) && (cmds = twsplit(piped[i])))
+			c->cmd = ft_strdup(cmds[0]);
+		if (cmds && c->cmd)
+			c->args[0] = ft_strdup(cmds[0]);
+		if (cmds && redirections(cmds, &c) == -1)
 			check = -1;
 		cmds ? freetwod(cmds) : 0;
 	}
-	check == 0 ? run_execs(commands->head) : 0;
-	commands ? free_cmds(commands) : 0;
+	check == 0 ? run_execs(c->head) : 0;
+	c ? free_cmds(c->head) : 0;
+	piped ? freetwod(piped) : 0;
 	return (check);
 }

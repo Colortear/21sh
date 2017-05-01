@@ -29,8 +29,7 @@ char	**ft_realloc2(char	**arr)
 	new[size] = 0;
 	while (arr && arr[++i] != 0)
 		new[i] = ft_strdup(arr[i]);
-	if (arr)
-		while (arr[++j])
-			free(arr[j]);
+	while (arr && arr[++j])
+		free(arr[j]);
 	return (new);
 }

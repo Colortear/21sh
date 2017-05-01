@@ -36,6 +36,7 @@ t_cmd	*link_cmds(t_cmd *cmds)
 	new->heredoc = NULL;
 	new->append = NULL;
 	new->cmd = NULL;
+	new->hds = NULL;
 	new->args = ft_tdnew(1);
 	return (new);
 }
@@ -54,9 +55,10 @@ void		free_cmds(t_cmd *cmds)
 		cmds->heredoc ? freetwod(cmds->heredoc) : 0;
 		cmds->cmd ? free(cmds->cmd) : 0;
 		cmds->args ? freetwod(cmds->args) : 0;
+		cmds->hds ? free(cmds->hds) : 0;
 		cmds = cmds->next;
 		if (cmds && cmds->prev)
 			free(cmds->prev);
 	}
-	tmp ? free(tmp) : 0;
+	free(tmp);
 }

@@ -38,27 +38,28 @@ char	**split_quotes(char *str, char **new, int *i)
 	int		j;
 	int		k;
 	int		size;
+	char	**tmp;
 
 	j = 0;
 	k = 0;
 	size = *i;
 	quote = check_expansions(str[*i]);
-	new = ft_realloc2(new);
-	while (new && new[j])
+	tmp = ft_realloc2(new);
+	while (tmp && tmp[j])
 		j++;
 	while (str[size] == quote)
 		size++;
 	while (str[size] && str[size] != quote)
 		size++;
-	new[j] = ft_strnew(size - *i);
+	tmp[j] = ft_strnew(size - *i);
 	while (++(*i) < size)
 	{
-		new[j][k] = str[*i];
+		tmp[j][k] = str[*i];
 		k++;
 	}
 	while (str[*i] == quote)
 		(*i)++;
-	return (new);
+	return (tmp);
 }
 
 char	**extract_cmd(char *str, char **new, int *i)
@@ -66,23 +67,25 @@ char	**extract_cmd(char *str, char **new, int *i)
 	int		j;
 	int		k;
 	int		size;
+	char	**tmp;
 
 	j = 0;
 	k = 0;
 	size = *i;
-	new = ft_realloc2(new);
-	while (new && new[j] != 0)
+	tmp = ft_realloc2(new);
+	while (tmp && tmp[j] != 0)
 		j++;
 	while (str[size] && str[size] != ' ' && str[size] != '\t')
 		size++;
-	new[j] = ft_strnew(size - *i);
+	tmp[j] = ft_strnew(size - *i);
 	while (*i < size)
 	{
-		new[j][k] = str[*i];
+		tmp[j][k] = str[*i];
 		k++;
 		(*i)++;
 	}
-	return (new);
+	new ? free(new) : 0;
+	return (tmp);
 }
 
 char	check_expansions(char exp)

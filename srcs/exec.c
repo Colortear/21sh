@@ -77,6 +77,7 @@ static int	path_cmd(char **cmd, int check)
 		}
 		tmp ? free(tmp) : 0;
 	}
+	paths ? freetwod(paths) : 0;
 	return (check);
 }
 
