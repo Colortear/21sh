@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 15:38:39 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/28 22:33:29 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 22:22:39 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ int			parse_pipes(char *str)
 	cmds = NULL;
 	while (piped[++i] && check_spaces(piped[i]) && check == 0)
 	{
-		if ((c = link_cmds(c)) && (cmds = twsplit(piped[i])))
-			c->cmd = ft_strdup(cmds[0]);
-		if (cmds && c->cmd)
-			c->args[0] = ft_strdup(cmds[0]);
+		c = link_cmds(c);
+		cmds = twsplit(piped[i]);
+		c->cmd = cmds ? ft_strdup(cmds[0]) : NULL;
+		c->cmd ? c->args[0] = ft_strdup(cmds[0]) : NULL;
 		if (cmds && redirections(cmds, &c) == -1)
 			check = -1;
 		cmds ? freetwod(cmds) : 0;

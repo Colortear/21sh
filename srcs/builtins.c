@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 00:21:55 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 18:01:48 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 22:27:15 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	run_echo(char **args)
 			ft_putstr(tmp);
 		else
 			ft_putstr(args[i]);
-		if(args[i + 1])
+		if (args[i + 1])
 			write(1, " ", 1);
 		tmp = NULL;
 	}

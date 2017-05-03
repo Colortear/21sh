@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 19:56:21 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/25 22:12:12 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 21:56:21 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**split_quotes(char *str, char **new, int *i)
 	char	**tmp;
 
 	j = 0;
-	k = 0;
+	k = -1;
 	size = *i;
 	quote = check_expansions(str[*i]);
 	tmp = ft_realloc2(new);
@@ -53,10 +53,7 @@ char	**split_quotes(char *str, char **new, int *i)
 		size++;
 	tmp[j] = ft_strnew(size - *i);
 	while (++(*i) < size)
-	{
-		tmp[j][k] = str[*i];
-		k++;
-	}
+		tmp[j][++k] = str[*i];
 	while (str[*i] == quote)
 		(*i)++;
 	return (tmp);

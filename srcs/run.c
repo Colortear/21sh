@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 22:07:45 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/28 20:23:50 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 22:27:06 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int		exec(t_cmd *cmds, int bin)
 	if (!ft_strcmp(cmds->cmd, "cd") || !ft_strcmp(cmds->cmd, "setenv") ||
 			!ft_strcmp(cmds->cmd, "unsetenv"))
 		run_builtins(cmds);
-	else if ((pid = fork()) == (pid_t) 0)
+	else if ((pid = fork()) == (pid_t)0)
 		run(cmds, fd, bin, fd_in);
-	else if (pid < (pid_t) 0)
+	else if (pid < (pid_t)0)
 		ret = -1;
 	else
 	{

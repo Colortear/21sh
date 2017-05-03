@@ -6,13 +6,13 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 18:59:29 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 19:54:33 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 21:54:34 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_realloc2(char	**arr)
+char	**ft_realloc2(char **arr)
 {
 	char	**new;
 	int		size;

@@ -6,13 +6,13 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/28 20:59:20 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/03 00:01:28 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "twsh.h"
 
-int		openfile(char *file, int redir)
+int			openfile(char *file, int redir)
 {
 	int		fd;
 
@@ -37,7 +37,7 @@ static void	duplications(t_cmd *cmds)
 		if (!cmds->heredoc[i + 1] && cmds->in_ord == 1 &&
 				(fd = heredoc(cmds, cmds->heredoc[i])) && dup2(fd, 0) != -1)
 			close(fd);
-	i = -1;	
+	i = -1;
 	while (cmds->out && cmds->out[++i] &&
 			(fd = openfile(cmds->out[i], RIGHT_REDIR)))
 		if (cmds->out_ord == 2 && dup2(fd, 1) != -1)
@@ -81,14 +81,14 @@ static int	path_cmd(char **cmd, int check)
 	return (check);
 }
 
-int		check_cmds(char **cmd)
+int			check_cmds(char **cmd)
 {
 	int		type;
 	int		check;
 
 	type = 0;
 	check = 0;
-	if (!ft_strcmp(*cmd, "echo") || !ft_strcmp(*cmd, "cd") || 
+	if (!ft_strcmp(*cmd, "echo") || !ft_strcmp(*cmd, "cd") ||
 			!ft_strcmp(*cmd, "setenv") || !ft_strcmp(*cmd, "unsetenv")
 			|| !ft_strcmp(*cmd, "env"))
 		type = BIN;
@@ -99,7 +99,7 @@ int		check_cmds(char **cmd)
 	return (type);
 }
 
-void	run_execs(t_cmd *cmds)
+void		run_execs(t_cmd *cmds)
 {
 	int		bin;
 	int		in;
@@ -112,7 +112,7 @@ void	run_execs(t_cmd *cmds)
 	tmp = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
-		cmds->aggs ? ampersand(cmds) : 0;
+		cmds->aggs ? check_aggs(cmds->aggs) : 0;
 		duplications(cmds);
 		bin = exec(cmds, bin) == -1 ? 0 : bin;
 		tmp = cmds;

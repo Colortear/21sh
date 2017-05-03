@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 21:12:07 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 17:07:31 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 22:26:35 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_cmd	*link_cmds(t_cmd *cmds)
 {
 	t_cmd	*new;
-	
+
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (cmds)
 	{
@@ -41,7 +41,7 @@ t_cmd	*link_cmds(t_cmd *cmds)
 	return (new);
 }
 
-void		free_cmds(t_cmd *cmds)
+void	free_cmds(t_cmd *cmds)
 {
 	t_cmd	*tmp;
 
@@ -57,8 +57,7 @@ void		free_cmds(t_cmd *cmds)
 		cmds->args ? freetwod(cmds->args) : 0;
 		cmds->hds ? free(cmds->hds) : 0;
 		cmds = cmds->next;
-		if (cmds && cmds->prev)
-			free(cmds->prev);
+		free(tmp);
 	}
-	free(tmp);
+	free(cmds);
 }

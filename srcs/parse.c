@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:40:23 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/21 15:22:59 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 21:57:37 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,19 @@ t_history	*copy_history(t_history *hist)
 
 t_history	*read_and_parse(t_shell *shell, t_history *hist)
 {
+	int			check;
 	char		c;
 	t_history	*hist_copy;
 
+	check = 0;
 	hist_copy = copy_history(hist);
-	while ((c = ft_getchar_mod(0)))
-		if (terms_esc(c, shell, &hist_copy) == 0 && ((c > 9 && c < 14)
-					|| (c > 31 && c < 127)))
+	while (check != -1 && (c = ft_getchar_mod(0)))
+		if ((check = terms_esc(c, shell, &hist_copy)) == 0 &&
+				((c > 9 && c < 14) || c == 4 || (c > 31 && c < 127)))
 			insert_char(&c, shell, hist_copy);
 	if (hist_copy->cmd)
 		hist = add_cmd(shell, hist_copy);
+	hist->d = check == -1 ? 1 : 0;
 	destroy_copy(hist_copy);
 	return (hist);
 }
@@ -85,7 +88,7 @@ t_history	*read_and_parse(t_shell *shell, t_history *hist)
 int			check_spaces(char *str)
 {
 	int		i;
-	
+
 	i = 0;
 	while (str[i])
 	{

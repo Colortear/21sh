@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:23:51 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/28 22:36:24 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/01 21:50:22 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			main(void)
 		hist = setup(shell, hist);
 		hist = read_and_parse(shell, hist);
 		ft_putstr("\n\r");
-		if (hist->cmd && command(hist) == 1)
+		if ((hist->cmd && command(hist) == 1) || hist->d == 1)
 			break ;
 	}
 	cleanup(shell, hist);

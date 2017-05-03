@@ -5,9 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 14:49:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/28 20:53:16 by wdebs            ###   ########.fr       */
-/*   Updated: 2017/04/17 20:52:22 by wdebs            ###   ########.fr       */
+/*   Created: 2017/05/01 21:55:00 by wdebs             #+#    #+#             */
+/*   Updated: 2017/05/02 23:48:28 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +100,7 @@ typedef struct			s_history
 	int					x_max[1000];
 	int					y_max;
 	int					chars;
+	int					d;
 	char				*cmd;
 }						t_history;
 
@@ -167,5 +167,7 @@ void					ampersand(t_cmd *cmds);
 int						ampersand_type(char **amp);
 int						isnum(char *tmp, int size);
 void					amp(char **tmp, int type);
+void					fd_dups(char **split);
+void					check_aggs(char **aggs);
 
 #endif
