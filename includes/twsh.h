@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/01 21:55:00 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/02 23:48:28 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/12 21:31:21 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define UP_INPUT		tgetstr("ku", NULL)
 # define DOWN_INPUT		tgetstr("kd", NULL)
 # define HOME_KEY		tgetstr("kh", NULL)
-# define END_KEY		tgetstr("@7", NULL);
+# define END_KEY		tgetstr("@7", NULL)
 # define HISTORY_UP		0
 # define HISTORY_DOWN	1
 # define PIPE			0
@@ -71,6 +71,8 @@
 # define LOCAL			3
 # define AMP_LEFT		1
 # define AMP_RIGHT		2
+
+int						g_reset;
 
 typedef struct			s_cmd
 {

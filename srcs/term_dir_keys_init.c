@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:33:32 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/01 21:52:29 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/12 22:23:10 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			terms_esc(char c, t_shell *shell, t_history **hist)
 	int	check;
 
 	check = 0;
+
 	if (c == 127 && (check = 1))
 		delete_char(shell, hist);
 	if (check == 0 && c == 27)

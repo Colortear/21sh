@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:30:28 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/03 15:45:32 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/03 18:06:52 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,22 @@
 
 int		ft_unsetenv(const char *name)
 {
+	char		**copy;
 	extern char	**environ;
-	char		**ep;
-	char		**sp;
-	size_t		len;
+	int			j;
+	int			len;
+	char		*temp;
 
-	len = ft_strlen(name);
-	ep = environ;
-	sp = ep;
-	if (name == NULL || name[0] == '\0' || ft_strchr(name, '=') != NULL)
-		return (-1);
-	while (*ep != NULL)
-	{
-		if (ft_strncmp(*ep, name, len) == 0 && (*ep)[len] == '=')
-		{
-			while (*sp != NULL)
-			{
-				*sp = *(sp + 1);
-				sp++;
-			}
-		}
-		else
-			ep++;
-	}
+	len = 0;
+	j = 0;
+	temp = ft_strtrim(name);
+	while (environ && environ[len])
+		len++;
+	copy = (char **)ft_memalloc(sizeof(char *) * (len + 2));
+	len = -1;
+	while (environ[++len])
+		if (ft_strncmp(environ[len], temp, ft_strlen(temp)))
+			copy[j++] = environ[len];
+	environ = copy;
 	return (0);
 }

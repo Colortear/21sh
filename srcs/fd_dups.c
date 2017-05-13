@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/01 22:23:02 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/03 00:03:57 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/03 17:22:11 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	fd_dups(char **split)
 			isnum(split[0], ft_strlen(split[0]) - 1))
 		close(ft_atoi(split[0]));
 	else if (dir == 1 && !ft_strcmp(split[0], "-") &&
-			isnum(split[1], ft_strlen(split[1]) - 1))
+			isnum(split[1], ft_strlen(split[1])))
 		close(ft_atoi(split[1]));
 	else if (dir == 1 && isnum(split[0], ft_strlen(split[0]) - 1) &&
-			isnum(split[1], ft_strlen(split[1]) - 1))
+			isnum(split[1], ft_strlen(split[1])))
 		dup2(ft_atoi(split[1]), ft_atoi(split[0]));
 	else if (dir == 2 && isnum(split[0], ft_strlen(split[0]) - 1) &&
-			isnum(split[1], ft_strlen(split[1]) - 1))
+			isnum(split[1], ft_strlen(split[1])))
 		dup2(ft_atoi(split[0]), ft_atoi(split[1]));
 }
 

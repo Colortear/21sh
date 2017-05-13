@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 22:07:45 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/01 22:27:06 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/03 17:32:41 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		exec(t_cmd *cmds, int bin)
 	int			status;
 
 	ret = cmds->next ? pipe(fd) : 0;
+	cmds->aggs ? check_aggs(cmds->aggs) : 0;
 	if (!ft_strcmp(cmds->cmd, "cd") || !ft_strcmp(cmds->cmd, "setenv") ||
 			!ft_strcmp(cmds->cmd, "unsetenv"))
 		run_builtins(cmds);
@@ -87,9 +88,9 @@ void	run_builtins(t_cmd *cmds)
 	else if (!ft_strcmp(cmds->cmd, "cd"))
 		run_cd(cmds->args);
 	else if (!ft_strcmp(cmds->cmd, "setenv") && cmds->args)
-		ft_setenv(cmds->args[0], cmds->args[1]);
+		ft_setenv(cmds->args[1], cmds->args[2]);
 	else if (!ft_strcmp(cmds->cmd, "unsetenv") && cmds->args)
-		ft_unsetenv(cmds->args[0]);
+		ft_unsetenv(cmds->args[1]);
 	else if (!ft_strcmp(cmds->cmd, "env"))
 		run_env();
 }

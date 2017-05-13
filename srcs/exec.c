@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/03 00:01:28 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/05/03 21:02:22 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,52 @@
 
 int			openfile(char *file, int redir)
 {
-	int		fd;
+	int			fd;
+	struct stat	st;
 
 	fd = 0;
 	if (redir == RIGHT_REDIR)
 		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0600);
 	else if (redir == RIGHT_DOUBLE)
 		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0600);
-	else if (redir == LEFT_REDIR)
+	else if (redir == LEFT_REDIR && (fd = lstat(file, &st)) != -1)
 		fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr("21sh: File does not exist: ");
+		ft_putstr(file);
+		write(1, "\r\n", 2);
+	}
 	return (fd);
 }
 
-static void	duplications(t_cmd *cmds)
+static int	duplications(t_cmd *cmds)
 {
 	int		fd;
 	int		i;
 
 	fd = 0;
 	i = -1;
-	while (cmds->heredoc && cmds->heredoc[++i])
+	while (fd != -1 && cmds->heredoc && cmds->heredoc[++i])
 		if (!cmds->heredoc[i + 1] && cmds->in_ord == 1 &&
 				(fd = heredoc(cmds, cmds->heredoc[i])) && dup2(fd, 0) != -1)
 			close(fd);
 	i = -1;
-	while (cmds->out && cmds->out[++i] &&
+	while (fd != -1 && cmds->out && cmds->out[++i] &&
 			(fd = openfile(cmds->out[i], RIGHT_REDIR)))
 		if (cmds->out_ord == 2 && dup2(fd, 1) != -1)
 			close(fd);
 	i = -1;
-	while (cmds->in && cmds->in[++i] &&
-			(fd = openfile(cmds->in[i], LEFT_REDIR)))
-		if (cmds->in_ord == 2 && dup2(fd, 0) != -1)
-			close(fd);
-	i = -1;
-	while (cmds->append && cmds->append[++i] &&
+	while (fd != -1 && cmds->append && cmds->append[++i] &&
 			(fd = openfile(cmds->append[i], RIGHT_DOUBLE)))
 		if (cmds->out_ord == 1 && dup2(fd, 1) != -1)
 			close(fd);
+	i = -1;
+	while (cmds->in && cmds->in[++i] &&
+			(fd = openfile(cmds->in[i], LEFT_REDIR)) != -1)
+		if (cmds->in_ord == 2 && dup2(fd, 0) != -1)
+			close(fd);
+	return (fd);
 }
 
 static int	path_cmd(char **cmd, int check)
@@ -92,7 +100,8 @@ int			check_cmds(char **cmd)
 			!ft_strcmp(*cmd, "setenv") || !ft_strcmp(*cmd, "unsetenv")
 			|| !ft_strcmp(*cmd, "env"))
 		type = BIN;
-	else if (!ft_strncmp(*cmd, "./", 2) || !ft_strncmp(*cmd, "../", 3))
+	else if (!ft_strncmp(*cmd, "./", 2) || !ft_strncmp(*cmd, "../", 3)
+			|| !ft_strncmp(*cmd, "/", 1))
 		type = LOCAL;
 	else if (ft_strcmp(*cmd, "exit") && path_cmd(cmd, check))
 		type = PATH;
@@ -112,18 +121,18 @@ void		run_execs(t_cmd *cmds)
 	tmp = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
-		cmds->aggs ? check_aggs(cmds->aggs) : 0;
-		duplications(cmds);
+		if (duplications(cmds) == -1 && (bin = 0))
+			break ;
 		bin = exec(cmds, bin) == -1 ? 0 : bin;
 		tmp = cmds;
 		cmds = next_cmd(cmds);
 	}
 	dup2(in, 0);
 	dup2(out, 1);
-	if (!bin && (cmds = tmp) && ft_strcmp(tmp->cmd, "exit") &&
-			write(1, "21sh: bad command ", 18))
+	if (!bin && (cmds = tmp) && ft_strcmp(tmp->cmd, "exit"))
 	{
+		write(1, "21sh: bad command ", 18);
 		ft_putstr(tmp->cmd);
-		ft_putstr("\n\r");
+		write(1, "\n\r", 2);
 	}
 }
