@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/01 21:55:00 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/12 21:31:21 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/13 20:49:48 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct			s_cmd
 	int					std_out;
 	int					std_err;
 	int					pipe_in;
+	int					fd[2];
 	char				*hds;
 }						t_cmd;
 
@@ -155,9 +156,9 @@ int						check_spaces(char *str);
 t_cmd					*link_cmds(t_cmd *cmds);
 void					run_execs(t_cmd *cmds);
 void					free_cmds(t_cmd *cmds);
-int						exec(t_cmd *cmds, int bin);
+int						exec(t_cmd *cmds);
 t_cmd					*next_cmd(t_cmd *cmds);
-void					run_builtins(t_cmd *cmds);
+int						run_builtins(t_cmd *cmds);
 void					run_env(void);
 void					run_echo(char **args);
 void					run_cd(char **path);
@@ -171,5 +172,6 @@ int						isnum(char *tmp, int size);
 void					amp(char **tmp, int type);
 void					fd_dups(char **split);
 void					check_aggs(char **aggs);
+void					lay_pipe(t_cmd *cmds);
 
 #endif

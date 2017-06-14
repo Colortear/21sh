@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/03 21:02:22 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/13 22:46:05 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,29 +110,26 @@ int			check_cmds(char **cmd)
 
 void		run_execs(t_cmd *cmds)
 {
+	t_cmd	*head;
+	//int		in;
+	//int		out;
 	int		bin;
-	int		in;
-	int		out;
-	t_cmd	*tmp;
 
 	bin = 1;
-	in = dup(0);
-	out = dup(1);
-	tmp = cmds;
+	//in = dup(0);
+	//out = dup(1);
+	head = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
 		if (duplications(cmds) == -1 && (bin = 0))
 			break ;
-		bin = exec(cmds, bin) == -1 ? 0 : bin;
-		tmp = cmds;
+		cmds->aggs ? check_aggs(cmds->aggs) : 0;
 		cmds = next_cmd(cmds);
 	}
-	dup2(in, 0);
-	dup2(out, 1);
-	if (!bin && (cmds = tmp) && ft_strcmp(tmp->cmd, "exit"))
-	{
-		write(1, "21sh: bad command ", 18);
-		ft_putstr(tmp->cmd);
-		write(1, "\n\r", 2);
-	}
+	if (!bin && ft_strcmp(cmds->cmd, "exit"))
+		write(1, "21sh: bad command\n\r", 19);
+	else if ((cmds = head))
+		lay_pipe(cmds);
+	//dup2(in, 0);
+	//dup2(out, 1);
 }
