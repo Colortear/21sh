@@ -6,7 +6,7 @@
 #    By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/28 14:28:46 by wdebs             #+#    #+#              #
-#    Updated: 2017/04/17 11:14:03 by wdebs            ###   ########.fr        #
+#    Updated: 2017/06/18 16:46:15 by wdebs            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ O_DIRS = $(C_DIRS:.%=$(O_DIR)%)
 O_FILES = $(C_FILES:.%.c=$(O_DIR)%.o)
 
 IFLAGS = -I $(INC_DIR) -I includes -I libft/includes
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 CC = gcc $(FLAGS)
 LIBFLAGS = -L./libft -lft -ltermcap

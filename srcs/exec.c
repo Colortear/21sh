@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/13 22:46:05 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 16:56:12 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ int			check_cmds(char **cmd)
 void		run_execs(t_cmd *cmds)
 {
 	t_cmd	*head;
-	//int		in;
-	//int		out;
+	int		in;
+	int		out;
 	int		bin;
 
 	bin = 1;
-	//in = dup(0);
-	//out = dup(1);
+	in = dup(0);
+	out = dup(1);
 	head = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
@@ -130,6 +130,6 @@ void		run_execs(t_cmd *cmds)
 		write(1, "21sh: bad command\n\r", 19);
 	else if ((cmds = head))
 		lay_pipe(cmds);
-	//dup2(in, 0);
-	//dup2(out, 1);
+	dup2(in, 0);
+	dup2(out, 1);
 }
