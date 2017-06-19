@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 20:08:08 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 18:13:27 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 18:24:31 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void		lay_pipe(t_cmd *cmds)
 {
 	int		lpipe[2];
 	int		rpipe[2];
-	int		status;
 
 	pipe(rpipe);
 	fork_and_chain(cmds, NULL, rpipe);
@@ -74,5 +73,5 @@ void		lay_pipe(t_cmd *cmds)
 	fork_and_chain(cmds, lpipe, NULL);
 	close(lpipe[0]);
 	close(lpipe[1]);
-	wait(&status);
+	waitpid(-1, NULL, 0);
 }

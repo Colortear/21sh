@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:33:32 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/12 22:23:10 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 18:44:16 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,26 @@
 static int	check_direction_keys(char *str, int check, t_shell *shell,
 		t_history **hist)
 {
-	char	*left;
-	char	*right;
-	char	*down;
-	char	*up;
+	extern char	**environ;
+	char		*left;
+	char		*right;
+	char		*down;
+	char		*up;
 
 	left = LEFT_INPUT;
 	right = RIGHT_INPUT;
 	down = DOWN_INPUT;
 	up = UP_INPUT;
-	if (ft_strcmp(str, left) == 0 && (check = 1) && shell->x > 0
+	if (environ && ft_strcmp(str, left) == 0 && (check = 1) && shell->x > 0
 			&& shell->x--)
 		LEFT;
-	else if (ft_strcmp(str, right) == 0 && (check = 1) &&
+	else if (environ && ft_strcmp(str, right) == 0 && (check = 1) &&
 			shell->x < (*hist)->x_max[shell->y] &&
 			++shell->x)
 		RIGHT;
-	else if (ft_strcmp(str, down) == 0 && (check = 1))
+	else if (environ && ft_strcmp(str, down) == 0 && (check = 1))
 		history_move(shell, hist, HISTORY_DOWN);
-	else if (ft_strcmp(str, up) == 0 && (check = 1))
+	else if (environ && ft_strcmp(str, up) == 0 && (check = 1))
 		history_move(shell, hist, HISTORY_UP);
 	return (check);
 }

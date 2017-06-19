@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:36:22 by wdebs             #+#    #+#             */
-/*   Updated: 2017/04/22 17:07:04 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 18:37:38 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void		disp_prompt(void)
 
 	current = NULL;
 	home_path = getenv("HOME");
-	home_len = ft_strlen(home_path);
+	home_len = home_path ? ft_strlen(home_path) : 0;
 	current = getcwd(NULL, 0);
-	if (ft_strlen(current) >= home_len &&
+	if (home_len && ft_strlen(current) >= home_len &&
 			ft_strncmp(home_path, current, home_len) == 0)
 	{
 		ft_putchar('~');

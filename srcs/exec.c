@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 16:56:12 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 18:38:34 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	path_cmd(char **cmd, int check)
 	i = -1;
 	check = 0;
 	paths = ft_strsplit(getenv("PATH"), ':');
-	while (paths[++i] && !check)
+	while (paths && paths[++i] && !check)
 	{
 		tmp = ft_strnew(ft_strlen(paths[i]) + ft_strlen(*cmd) + 1);
 		ft_strcpy(tmp, paths[i]);
@@ -128,8 +128,11 @@ void		run_execs(t_cmd *cmds)
 	}
 	if (!bin && ft_strcmp(cmds->cmd, "exit"))
 		write(1, "21sh: bad command\n\r", 19);
-	else if ((cmds = head))
+	else if ((cmds = head) && ft_strcmp("cd", cmds->cmd) &&
+			ft_strcmp("setenv", cmds->cmd) && ft_strcmp("unsetenv", cmds->cmd))
 		lay_pipe(cmds);
+	else
+		run_builtins(cmds);
 	dup2(in, 0);
 	dup2(out, 1);
 }
