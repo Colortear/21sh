@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 18:59:29 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 16:42:05 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 17:27:02 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ char	**ft_realloc2(char **arr)
 		new[i] = ft_strdup(arr[i]);
 	while (arr && arr[++j])
 		free(arr[j]);
+	free(arr);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 15:38:39 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 16:52:41 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 18:13:47 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void		add_file_type(t_cmd **cmds, int type, char *tmp)
 {
 	int		len;
 
-	write(1, "HERE\n", 5);
 	len = commands_length(type, *cmds);
 	if (type == RIGHT_REDIR && ((*cmds)->out = ft_realloc2((*cmds)->out)) &&
 			((*cmds)->out_ord = 2))
@@ -67,7 +66,7 @@ static int	redirections(char **cmd, t_cmd **cmds)
 
 	i = 0;
 	ft_strcmp(cmd[i], "exit") == 0 ? len = -1 : 0;
-	while (cmd[++i] && len != -1)
+	while (cmd && cmd[++i] && len != -1)
 	{
 		tmp = NULL;
 		if (ft_strcmp(cmd[i], ">") == 0 && (type = RIGHT_REDIR))

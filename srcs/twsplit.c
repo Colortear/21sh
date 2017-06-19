@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 19:56:21 by wdebs             #+#    #+#             */
-/*   Updated: 2017/05/01 21:56:21 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 17:51:09 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**split_quotes(char *str, char **new, int *i)
 	k = -1;
 	size = *i;
 	quote = check_expansions(str[*i]);
-	tmp = ft_realloc2(new);
+	tmp = new ? ft_realloc2(new) : ft_tdnew(1);
 	while (tmp && tmp[j])
 		j++;
 	while (str[size] == quote)
@@ -69,7 +69,7 @@ char	**extract_cmd(char *str, char **new, int *i)
 	j = 0;
 	k = 0;
 	size = *i;
-	tmp = ft_realloc2(new);
+	tmp = new ? ft_realloc2(new) : ft_tdnew(1);
 	while (tmp && tmp[j] != 0)
 		j++;
 	while (str[size] && str[size] != ' ' && str[size] != '\t')
@@ -81,7 +81,6 @@ char	**extract_cmd(char *str, char **new, int *i)
 		k++;
 		(*i)++;
 	}
-	new ? free(new) : 0;
 	return (tmp);
 }
 

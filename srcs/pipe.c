@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 20:08:08 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/13 22:39:46 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/06/18 18:13:27 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ static void	fork_and_chain(t_cmd *cmds, int *lpipe, int *rpipe)
 		if (rpipe)
 			set_write(rpipe);
 		if (!run_builtins(cmds) && !access(cmds->cmd, R_OK || X_OK))
-		{
 			execve(cmds->cmd, cmds->args, environ);
-			write(1, "HERE\n\r", 6);
-		}
 		else
 		{
 			exe ? write(1, "21sh: permission denied\r\n", 25) : 0;
@@ -58,6 +55,7 @@ void		lay_pipe(t_cmd *cmds)
 {
 	int		lpipe[2];
 	int		rpipe[2];
+	int		status;
 
 	pipe(rpipe);
 	fork_and_chain(cmds, NULL, rpipe);
@@ -76,5 +74,5 @@ void		lay_pipe(t_cmd *cmds)
 	fork_and_chain(cmds, lpipe, NULL);
 	close(lpipe[0]);
 	close(lpipe[1]);
-	waitpid(-1, NULL, 0);
+	wait(&status);
 }
