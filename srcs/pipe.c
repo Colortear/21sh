@@ -30,9 +30,7 @@ static void	fork_and_chain(t_cmd *cmds, int *lpipe, int *rpipe)
 {
 	extern char	**environ;
 	pid_t		pid;
-	int			exe;
 
-	exe = 0;
 	if ((pid = fork()) == 0)
 	{
 		if (lpipe)
@@ -43,12 +41,13 @@ static void	fork_and_chain(t_cmd *cmds, int *lpipe, int *rpipe)
 			execve(cmds->cmd, cmds->args, environ);
 		else
 		{
-			exe ? write(1, "21sh: permission denied\r\n", 25) : 0;
+			if (ft_strcmp("echo", cmds->cmd) && ft_strcmp("env", cmds->cmd))
+				write(2, "21sh: permission denied\r\n", 25);
 			exit(1);
 		}
 	}
 	else if (pid == -1)
-		write(1, "21sh: something bad happened\r\n", 30);
+		write(2, "21sh: something bad happened\r\n", 30);
 }
 
 void		lay_pipe(t_cmd *cmds)
@@ -73,5 +72,6 @@ void		lay_pipe(t_cmd *cmds)
 	fork_and_chain(cmds, lpipe, NULL);
 	close(lpipe[0]);
 	close(lpipe[1]);
-	waitpid(-1, NULL, 0);
+	while (waitpid(-1, NULL, 0) != -1)
+		continue ;
 }
