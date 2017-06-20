@@ -56,6 +56,7 @@ void		lay_pipe(t_cmd *cmds)
 	int		rpipe[2];
 
 	pipe(rpipe);
+	end_termcap();
 	fork_and_chain(cmds, NULL, rpipe);
 	lpipe[0] = rpipe[0];
 	lpipe[1] = rpipe[1];
@@ -74,4 +75,5 @@ void		lay_pipe(t_cmd *cmds)
 	close(lpipe[1]);
 	while (waitpid(-1, NULL, 0) != -1)
 		continue ;
+	set_termcap();
 }

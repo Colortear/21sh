@@ -73,6 +73,7 @@
 # define AMP_RIGHT		2
 
 int						g_reset;
+struct termios			g_old_term;
 
 typedef struct			s_cmd
 {
@@ -117,8 +118,8 @@ typedef struct			s_shell
 }						t_shell;
 
 int						command(t_history *hist);
-int						set_termcap(t_shell *shell);
-int						end_termcap(t_shell *shell);
+int						set_termcap(void);
+int						end_termcap(void);
 int						terms_esc(char c, t_shell *shell,
 		t_history **hist);
 void					exit_shell(t_history *hist,

@@ -16,7 +16,7 @@ void	cleanup(t_shell *shell, t_history *hist)
 {
 	t_history	*prev_tmp;
 
-	end_termcap(shell);
+	end_termcap();
 	while (hist != NULL)
 	{
 		prev_tmp = hist->prev;

@@ -113,11 +113,13 @@ void		run_execs(t_cmd *cmds)
 	t_cmd	*head;
 	int		in;
 	int		out;
+	int		err;
 	int		bin;
 
 	bin = 1;
 	in = dup(0);
 	out = dup(1);
+	err = dup(2);
 	head = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
@@ -135,4 +137,5 @@ void		run_execs(t_cmd *cmds)
 		run_builtins(cmds);
 	dup2(in, 0);
 	dup2(out, 1);
+	dup2(err, 2);
 }

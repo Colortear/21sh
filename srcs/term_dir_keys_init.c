@@ -73,16 +73,16 @@ int			terms_esc(char c, t_shell *shell, t_history **hist)
 	return (check);
 }
 
-int			set_termcap(t_shell *shell)
+int			set_termcap(void)
 {
 	struct termios	new;
 	char			*term;
 
 	term = getenv("TERM");
 	tgetent(NULL, term);
-	if (tcgetattr(0, &shell->old) < 0)
+	if (tcgetattr(0, &g_old_term) < 0)
 		return (-1);
-	new = shell->old;
+	new = g_old_term;
 	new.c_lflag &= ~(ECHO | ICANON);
 	new.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
 	new.c_cflag &= ~(CSIZE | PARENB);
@@ -95,9 +95,9 @@ int			set_termcap(t_shell *shell)
 	return (1);
 }
 
-int			end_termcap(t_shell *shell)
+int			end_termcap(void)
 {
-	if (tcsetattr(0, TCSAFLUSH, &shell->old) < 0)
+	if (tcsetattr(0, TCSAFLUSH, &g_old_term) < 0)
 		return (-1);
 	KEYS_LOCAL;
 	return (0);

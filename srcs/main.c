@@ -60,7 +60,7 @@ int			main(void)
 	hist->prev = NULL;
 	shell->hist_head = NULL;
 	shell->path = NULL;
-	if (set_termcap(shell) < 0)
+	if (set_termcap() < 0)
 		exit_shell(hist, shell, 1);
 	while (1)
 	{
