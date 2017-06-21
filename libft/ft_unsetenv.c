@@ -28,7 +28,7 @@ int		ft_unsetenv(const char *name)
 	copy = (char **)ft_memalloc(sizeof(char *) * (len + 2));
 	len = -1;
 	while (environ[++len])
-		if (ft_strncmp(environ[len], temp, ft_strlen(temp)))
+		if (ft_strlcmp(environ[len], temp, ft_strlen(temp)))
 			copy[j++] = environ[len];
 	environ = copy;
 	return (0);

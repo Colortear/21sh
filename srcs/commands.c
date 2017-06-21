@@ -104,6 +104,10 @@ int			parse_pipes(char *str)
 		c = link_cmds(c);
 		cmds = twsplit(piped[i]);
 		c->cmd = cmds ? ft_strdup(cmds[0]) : NULL;
+		if (c->cmd == NULL)
+			write(1, "NULL\n\r", 6);
+		else
+			write(1, "STUFF\n\r", 7);
 		c->args[0] = c->cmd ? ft_strdup(cmds[0]) : NULL;
 		if (cmds && redirections(cmds, &c) == -1)
 			check = -1;

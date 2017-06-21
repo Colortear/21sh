@@ -1,2 +1,2 @@
 TODO:
-		-word jumping in line.
+		-Segfault when redirecting a file that doesnt exist

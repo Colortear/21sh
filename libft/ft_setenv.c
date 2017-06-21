@@ -44,7 +44,7 @@ int			ft_setenv(const char *name, const char *value)
 	free(env);
 	while (environ && environ[++i])
 	{
-		if (!ft_strncmp(environ[i], name, ft_strlen(name)))
+		if (!ft_strlcmp(environ[i], name, ft_strlen(name)))
 		{
 			env = environ[i];
 			environ[i] = line;
