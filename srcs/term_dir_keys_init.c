@@ -25,8 +25,8 @@ static int	check_direction_keys(char *str, int check, t_shell *shell,
 	right = RIGHT_INPUT;
 	down = DOWN_INPUT;
 	up = UP_INPUT;
-	if (environ && ft_strcmp(str, left) == 0 && (check = 1) && shell->x > 0
-			&& shell->x--)
+	if (environ && ft_strcmp(str, left) == 0 && (check = 1) &&
+			shell->x > 0 && shell->x-- && write(1, "SHIT\n\r", 6))
 		LEFT;
 	else if (environ && ft_strcmp(str, right) == 0 && (check = 1) &&
 			shell->x < (*hist)->x_max[shell->y] &&
