@@ -65,7 +65,7 @@ static int	redirections(char **cmd, t_cmd **cmds)
 	char	*tmp;
 
 	i = 0;
-	ft_strcmp(cmd[i], "exit") == 0 ? len = -1 : 0;
+	len = ft_strcmp(cmd[i], "exit") == 0 ? -1 : 0;
 	while (cmd && cmd[++i] && len != -1)
 	{
 		tmp = NULL;
@@ -104,10 +104,6 @@ int			parse_pipes(char *str)
 		c = link_cmds(c);
 		cmds = twsplit(piped[i]);
 		c->cmd = cmds ? ft_strdup(cmds[0]) : NULL;
-		if (c->cmd == NULL)
-			write(1, "NULL\n\r", 6);
-		else
-			write(1, "STUFF\n\r", 7);
 		c->args[0] = c->cmd ? ft_strdup(cmds[0]) : NULL;
 		if (cmds && redirections(cmds, &c) == -1)
 			check = -1;

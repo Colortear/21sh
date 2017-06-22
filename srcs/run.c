@@ -45,3 +45,23 @@ int		run_builtins(t_cmd *cmds)
 		run_env();
 	return (ret);
 }
+
+void	save_fd(int io)
+{
+	static int	in = 0;
+	static int	out = 1;
+	static int	err = 2;
+
+	if (!io)
+	{
+		in = dup(0);
+		out = dup(1);
+		err = dup(2);
+	}
+	else
+	{
+		dup2(in, 0);
+		dup2(out, 1);
+		dup2(err, 2);
+	}
+}

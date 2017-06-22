@@ -17,7 +17,7 @@
 # include <string.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 5
+# define BUFF_SIZE 1028
 
 typedef struct		s_list
 {
@@ -118,5 +118,6 @@ char				**ft_tdnew(int size);
 int					ft_twodlen(char **arr);
 char				**ft_freetwod(char **str);
 int					ft_strlcmp(const char *s1, const char *s2, int size);
+int					get_next_line(const int fd, char **line);
 
 #endif

@@ -111,15 +111,9 @@ int			check_cmds(char **cmd)
 void		run_execs(t_cmd *cmds)
 {
 	t_cmd	*head;
-	int		in;
-	int		out;
-	int		err;
 	int		bin;
 
 	bin = 1;
-	in = dup(0);
-	out = dup(1);
-	err = dup(2);
 	head = cmds;
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
@@ -128,14 +122,11 @@ void		run_execs(t_cmd *cmds)
 		cmds->aggs ? check_aggs(cmds->aggs) : 0;
 		cmds = next_cmd(cmds);
 	}
-	if (!bin && ft_strcmp(cmds->cmd, "exit"))
+	if (cmds && !bin && ft_strcmp(cmds->cmd, "exit"))
 		write(1, "21sh: bad command\n\r", 19);
-	else if ((cmds = head) && ft_strcmp("cd", cmds->cmd) &&
+	else if ((cmds = head) && bin && ft_strcmp("cd", cmds->cmd) &&
 			ft_strcmp("setenv", cmds->cmd) && ft_strcmp("unsetenv", cmds->cmd))
 		lay_pipe(cmds);
 	else
 		run_builtins(cmds);
-	dup2(in, 0);
-	dup2(out, 1);
-	dup2(err, 2);
 }

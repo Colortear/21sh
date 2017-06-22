@@ -174,5 +174,6 @@ void					amp(char **tmp, int type);
 void					fd_dups(char **split);
 void					check_aggs(char **aggs);
 void					lay_pipe(t_cmd *cmds);
+void					save_fd(int io);
 
 #endif

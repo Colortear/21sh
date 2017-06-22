@@ -39,12 +39,9 @@ static void	fork_and_chain(t_cmd *cmds, int *lpipe, int *rpipe)
 			set_write(rpipe);
 		if (!run_builtins(cmds) && !access(cmds->cmd, R_OK || X_OK))
 			execve(cmds->cmd, cmds->args, environ);
-		else
-		{
-			if (ft_strcmp("echo", cmds->cmd) && ft_strcmp("env", cmds->cmd))
-				write(2, "21sh: permission denied\r\n", 25);
-			exit(1);
-		}
+		else if (cmds && ft_strcmp("echo", cmds->cmd) && ft_strcmp("env", cmds->cmd))
+			write(2, "21sh: permission denied\r\n", 25);
+		exit(1);
 	}
 	else if (pid == -1)
 		write(2, "21sh: something bad happened\r\n", 30);
