@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:33:32 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 18:44:16 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/08/11 16:12:49 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_direction_keys(char *str, int check, t_shell *shell,
 	down = DOWN_INPUT;
 	up = UP_INPUT;
 	if (environ && ft_strcmp(str, left) == 0 && (check = 1) &&
-			shell->x > 0 && shell->x-- && write(1, "SHIT\n\r", 6))
+			shell->x > 0 && shell->x--)
 		LEFT;
 	else if (environ && ft_strcmp(str, right) == 0 && (check = 1) &&
 			shell->x < (*hist)->x_max[shell->y] &&
@@ -78,6 +78,7 @@ int			set_termcap(void)
 	struct termios	new;
 	char			*term;
 
+	getenv("TERM") == NULL ? ft_setenv("TERM", "xterm-256color") : 0;
 	term = getenv("TERM");
 	tgetent(NULL, term);
 	if (tcgetattr(0, &g_old_term) < 0)

@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:36:22 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 18:37:38 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/08/11 16:28:52 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_history	*setup(t_shell *shell, t_history *hist)
 	shell->x = 0;
 	shell->path = shell->path ? freetwod(shell->path) : 0;
 	shell->path = ft_strsplit(getenv("PATH"), ':');
+	//getenv("TERM") == NULL ? ft_setenv("TERM", "xterm-256color") : 0;
 	hist = init_hist(shell, hist);
 	return (hist);
 }
