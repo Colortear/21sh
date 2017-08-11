@@ -1,2 +1,2 @@
 TODO:
-		-Segfault when redirecting a file that doesnt exist
+		-prevent ctrl+d when text is in line

@@ -6,7 +6,7 @@
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:31:13 by wdebs             #+#    #+#             */
-/*   Updated: 2017/06/18 18:38:34 by wdebs            ###   ########.fr       */
+/*   Updated: 2017/08/11 14:21:15 by wdebs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void		run_execs(t_cmd *cmds)
 
 	bin = 1;
 	head = cmds;
+	save_fd(0);
 	while (cmds && bin && (bin = check_cmds(&cmds->cmd)) != 0)
 	{
 		if (duplications(cmds) == -1 && (bin = 0))
@@ -129,4 +130,5 @@ void		run_execs(t_cmd *cmds)
 		lay_pipe(cmds);
 	else
 		run_builtins(cmds);
+	save_fd(1);
 }
