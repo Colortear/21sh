@@ -30,7 +30,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_strtrim.c grab_line.c ft_setenv.c ft_unsetenv.c b_tree.c \
 	  ft_getchar_mod.c ft_insrtchar.c ft_delchar.c ft_strspn.c ft_tdnew.c \
 	  ft_reallloc2.c ft_twodlen.c ft_twodfree.c ft_strlcmp.c \
-	  get_next_line.c \
+	  get_next_line.c ft_strip_range.c\
 
 OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 	  ft_isdigit.o ft_isprint.o ft_memccpy.o ft_memchr.o ft_memcmp.o \
@@ -47,7 +47,7 @@ OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 	  ft_strtrim.o grab_line.o ft_setenv.o ft_unsetenv.o b_tree.o \
 	  ft_getchar_mod.o ft_insrtchar.o ft_delchar.o ft_strspn.o ft_tdnew.o \
 	  ft_realloc2.o ft_twodlen.o ft_twodfree.o ft_strlcmp.o \
-	  get_next_line.o \
+	  get_next_line.o ft_strip_range.o\
 
 CFLAGS = -Wall -Wextra -Werror -c
 

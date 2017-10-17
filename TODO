@@ -1,2 +1,5 @@
 TODO:
 		-prevent ctrl+d when text is in line
+		-currently, cd will only save on previous path and then point back on current path
+		- cd does not use tilde for home path. Must add.
+		-fix padding on ouput of stdout.

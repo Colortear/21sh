@@ -36,7 +36,7 @@ void		add_file_type(t_cmd **cmds, int type, char *tmp)
 {
 	int		len;
 
-	len = commands_length(type, *cmds);
+	len = commands_length(type, *cmds); 
 	if (type == RIGHT_REDIR && ((*cmds)->out = ft_realloc2((*cmds)->out)) &&
 			((*cmds)->out_ord = 2))
 		(*cmds)->out[len] = ft_strdup(tmp);
@@ -69,13 +69,13 @@ static int	redirections(char **cmd, t_cmd **cmds)
 	while (cmd && cmd[++i] && len != -1)
 	{
 		tmp = NULL;
-		if (ft_strcmp(cmd[i], ">") == 0 && (type = RIGHT_REDIR))
+		if (!ft_strcmp(cmd[i], ">") && (type = RIGHT_REDIR))
 			tmp = cmd[++i];
-		else if (ft_strcmp(cmd[i], "<") == 0 && (type = LEFT_REDIR))
+		else if (!ft_strcmp(cmd[i], "<") && (type = LEFT_REDIR))
 			tmp = cmd[++i];
-		else if (ft_strcmp(cmd[i], ">>") == 0 && (type = RIGHT_DOUBLE))
+		else if (!ft_strcmp(cmd[i], ">>") && (type = RIGHT_DOUBLE))
 			tmp = cmd[++i];
-		else if (ft_strcmp(cmd[i], "<<") == 0 && (type = LEFT_DOUBLE))
+		else if (!ft_strcmp(cmd[i], "<<") && (type = LEFT_DOUBLE))
 			tmp = cmd[++i];
 		else if (ft_strchr(cmd[i], '&') && (type = AMPERSAND))
 			tmp = cmd[i];

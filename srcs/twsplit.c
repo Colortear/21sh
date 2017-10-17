@@ -22,7 +22,7 @@ char	**twsplit(char *str)
 	while (str && str[i])
 	{
 		if (str[i] == 34 || str[i] == 39 || str[i] == 96 ||
-				str[i] == 40 || str[i] == 91 || str[i] == 123)
+				str[i] == '(' || str[i] == '[' || str[i] == '{')
 			new = split_quotes(str, new, &i);
 		else if (str[i] != ' ' && str[i] != '\t')
 			new = extract_cmd(str, new, &i);

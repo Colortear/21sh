@@ -125,7 +125,7 @@ void		run_execs(t_cmd *cmds)
 	}
 	if (cmds && !bin && ft_strcmp(cmds->cmd, "exit"))
 		write(1, "21sh: bad command\n\r", 19);
-	else if ((cmds = head) && bin && ft_strcmp("cd", cmds->cmd) &&
+	else if ((cmds = head) && bin > 1 && ft_strcmp("cd", cmds->cmd) &&
 			ft_strcmp("setenv", cmds->cmd) && ft_strcmp("unsetenv", cmds->cmd))
 		lay_pipe(cmds);
 	else

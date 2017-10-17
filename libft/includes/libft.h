@@ -119,5 +119,6 @@ int					ft_twodlen(char **arr);
 char				**ft_freetwod(char **str);
 int					ft_strlcmp(const char *s1, const char *s2, int size);
 int					get_next_line(const int fd, char **line);
+char				*ft_strip_range(char *str, int min, int max);
 
 #endif

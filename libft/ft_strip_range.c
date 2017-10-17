@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strip_range.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdebs <wdebs@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,37 +12,37 @@
 
 #include "libft.h"
 
-static void	startend(char const *s, char **start, char **end)
+static char	*ft_strip(char *str, int start, int end)
 {
-	int			trufal;
+	int		j;
+	char	*new;
 
-	trufal = 1;
-	while (*s != '\0')
+	j = 0;
+	new = NULL;
+	while (start < end + 1)
 	{
-		if (*s != ' ' && *s != '\n' && *s != '\t')
-			*end = (char *)s;
-		if (trufal == 1 && *s != ' ' && *s != '\n' && *s != '\t')
-		{
-			*start = (char *)s;
-			trufal = 0;
-		}
-		s++;
+		new[j] = str[start];
+		j++;
+		start++;
 	}
+	return (new);
 }
 
-char		*ft_strtrim(char const *s)
+char		*ft_strip_range(char *str, int min, int max)
 {
-	char		*start;
-	char		*end;
-	char		*trim;
+	int		i;
+	int		len;
 
-	if (!s)
-		return (0);
-	end = (char *)s;
-	start = (char *)s;
-	startend(s, &start, &end);
-	trim = ft_strsub(s, start - s, end - start + 1);
-	if (end - start <= 0)
-		trim[0] = '\0';
-	return (trim);
+	i = 0;
+	if (!str)
+		return (str);
+	len = ft_strlen(str) - 1;
+	while (len > -1 && i <= len)
+	{
+		if (str[i] > min && str[i] < max)
+			i++;
+		if (str[len] > min && str[len] < max)
+			len--;
+	}
+	return (ft_strip(str, i, len));
 }

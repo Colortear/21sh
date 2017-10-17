@@ -27,8 +27,8 @@ void	run_env(void)
 
 void	run_echo(char **args)
 {
-	int			i;
 	char		*tmp;
+	int			i;
 
 	i = 0;
 	tmp = NULL;
