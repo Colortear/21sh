@@ -69,7 +69,7 @@ int			terms_esc(char c, t_shell *shell, t_history **hist)
 	if (check == 0 && c == 27)
 		check = escape_chars(c, check, shell, hist);
 	if (check == 0 && c == 4)
-		check = -1;
+		check = shell->x ? 2 : -1;
 	return (check);
 }
 
@@ -85,7 +85,7 @@ int			set_termcap(void)
 		return (-1);
 	new = g_old_term;
 	new.c_lflag &= ~(ECHO | ICANON);
-	new.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+	new.c_iflag &= ~(BRKINT | ICRNL | INPCK | IXON);
 	new.c_cflag &= ~(CSIZE | PARENB);
 	new.c_cflag |= CS8;
 	new.c_cc[VMIN] = 1;

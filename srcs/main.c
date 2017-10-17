@@ -74,5 +74,6 @@ int			main(void)
 			break ;
 	}
 	cleanup(shell, hist);
+	write(1, "exit", 4);
 	return (0);
 }
