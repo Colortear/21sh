@@ -1,5 +1,4 @@
 TODO:
-		- cd does not use tilde for home path. Must add.
-		-fix padding on ouput of stdout.
 		-heredoc is seriously fucked up lol.
 		-file aggregation basically doesnt work.
+		-stderr reading bad file descriptors

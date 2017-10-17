@@ -12,7 +12,7 @@
 
 #include "twsh.h"
 
-char	heredoc_manage(char *key, int len)
+/*char	heredoc_manage(char *key, int len)
 {
 	char		c;
 	static int	check = 0;
@@ -54,6 +54,51 @@ int		heredoc(t_cmd *cmds, char *key)
 	buf[i - len] = 0;
 	if (i > -1)
 		cmds->hds = ft_strdup(buf);
+	fd = open("/tmp/hd", O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	fd ? write(fd, cmds->hds, ft_strlen(cmds->hds)) : 0;
+	close(fd);
+	fd = open("/tmp/hd", O_RDONLY);
+	return (fd);
+}*/
+
+static char	*input(char *key)
+{
+	char	*hd;
+	char	*new;
+	char	*tmp;
+	int		check;
+
+	check = 0;
+	hd = NULL;
+	while (1)
+	{
+		if (check)
+		{
+			new = ft_strjoin(hd, "\n");
+			free(hd);
+			hd = new;
+		}
+		get_next_line(0, &tmp);
+		if (!ft_strcmp(tmp, key))
+			break ;
+		new = (!check) ? ft_strdup(tmp) : ft_strjoin(hd, tmp);
+		free(hd);
+		free(tmp);
+		hd = new;
+		check = 1;
+	}
+	free(tmp);
+	return (hd);
+}
+
+
+int		heredoc(t_cmd *cmds, char *key)
+{
+	int	fd;
+
+	end_termcap();
+	cmds->hds = input(key);
+	set_termcap();
 	fd = open("/tmp/hd", O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	fd ? write(fd, cmds->hds, ft_strlen(cmds->hds)) : 0;
 	close(fd);

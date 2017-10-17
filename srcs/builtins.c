@@ -59,7 +59,7 @@ void	run_cd(char **path)
 	ft_setenv("OLDPWD", getcwd(NULL, 0));
 	if (path && path[1] && check == 0)
 	{
-		copy = path[1][0] == '~' ? ft_strjoin(getenv("HOME"), path[1]) :
+		copy = path[1][0] == '~' ? ft_strjoin(getenv("HOME"), path[1] + 1) :
 			ft_strdup(path[1]);
 		if (chdir(copy) < 0)
 			ft_putstr("cd: no such file or directory\n\r");
