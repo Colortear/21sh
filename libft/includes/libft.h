@@ -19,6 +19,17 @@
 
 # define BUFF_SIZE 1028
 
+typedef struct		s_stack_data
+{
+	int				*data;
+	s_stack_data	prev;
+
+typedef struct		s_stack
+{
+	t_stack_data	*data;
+	int				size;
+}					t_stack
+
 typedef struct		s_list
 {
 	void			*content;
@@ -120,5 +131,11 @@ char				**ft_freetwod(char **str);
 int					ft_strlcmp(const char *s1, const char *s2, int size, int e);
 int					get_next_line(const int fd, char **line);
 char				*ft_strip_range(char *str, int min, int max);
+
+int					peek(t_stack *stack);
+int					is_empty(t_stack *stack);
+void				pop(t_stack *stack);
+void				push(int data);
+t_stack				new_stack(void);
 
 #endif

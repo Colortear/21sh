@@ -14,8 +14,8 @@
 
 char	ft_getchar_mod(int fd)
 {
-	char		c;
-	static char	quote = 0;
+	char			c;
+	static stack	*quote = malloc(sizeof(stack));
 
 	if (!read(fd, &c, 1))
 		return (0);
