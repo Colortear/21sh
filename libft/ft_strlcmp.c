@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlcmp(const char *s1, const char *s2, int size)
+int		ft_strlcmp(const char *s1, const char *s2, int size, int e)
 {
 	int		i;
 	int		ret;
@@ -27,5 +27,7 @@ int		ft_strlcmp(const char *s1, const char *s2, int size)
 			break ;
 		i++;
 	}
+	if (e && i == size && s1[size] != '=')
+		ret = -1;
 	return (ret);
 }

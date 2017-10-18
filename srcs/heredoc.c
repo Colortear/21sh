@@ -61,45 +61,43 @@ int		heredoc(t_cmd *cmds, char *key)
 	return (fd);
 }*/
 
-static char	*input(char *key)
+static void	input(char **hd, char *key, int check)
 {
-	char	*hd;
 	char	*new;
 	char	*tmp;
-	int		check;
+	int		ret;
 
-	check = 0;
-	hd = NULL;
-	while (write(1, ">", 1))
+	while (1)
 	{
-		if (check)
+		write(1, "> ", 2);
+		if (check && (new = ft_strjoin(*hd, "\n")))
 		{
-			new = ft_strjoin(hd, "\n");
-			free(hd);
-			hd = new;
+			free(*hd);
+			*hd = new;
 		}
-		if (!get_next_line(0, &tmp) || !ft_strcmp(tmp, key))
+		if (!(ret = get_next_line(0, &tmp)) || !ft_strcmp(tmp, key))
 			break ;
-		new = (!check) ? ft_strdup(tmp) : ft_strjoin(hd, tmp);
-		free(hd);
+		new = (!check) ? ft_strdup(tmp) : ft_strjoin(*hd, tmp);
+		free(*hd);
 		free(tmp);
-		hd = new;
+		*hd = new;
 		check = 1;
 	}
+	if (!ret)
+		write(1, "Input interrupted by end-of-transmission signal.\n", 49);
 	free(tmp);
-	return (hd);
 }
 
-
-int		heredoc(t_cmd *cmds, char *key)
+int			heredoc(t_cmd *cmds, char *key)
 {
 	int	fd;
 
 	end_termcap();
-	cmds->hds = input(key);
+	input(&cmds->hds, key, 0);
 	set_termcap();
 	fd = open("/tmp/hd", O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	fd ? write(fd, cmds->hds, ft_strlen(cmds->hds)) : 0;
+	if (fd && cmds->hds)
+		write(fd, cmds->hds, ft_strlen(cmds->hds));
 	close(fd);
 	fd = open("/tmp/hd", O_RDONLY);
 	return (fd);

@@ -4,3 +4,4 @@ TODO:
 			get_next_line.
 		-file aggregation basically doesnt work.
 		-stderr reading bad file descriptors
+		-fix quote matching using a stack.
