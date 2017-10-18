@@ -148,7 +148,7 @@ int						check_home_end(char *str, int check,
 void					set_node(t_cmd **cmd, char *tmp, int type);
 char					**twsplit(char *str);
 char					**split_quotes(char *str, char **new, int *i);
-char					**extract_cmd(char *str, char **new, int *i);
+char					**extract_cmd(char *str, char **new, int *i, char delimit);
 int						parse_pipes(char *str);
 t_cmd					*insert_cmd_list(char *str, int type);
 void					destroy_cmd_list(t_cmd *cmd);

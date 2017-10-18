@@ -1,7 +1,4 @@
 TODO:
-		-heredoc is now not fucked up but I will implement a two process
-			pipeline that will facilitate arrow keys while still using
-			get_next_line.
-		-file aggregation basically doesnt work.
-		-stderr reading bad file descriptors
-		-fix quote matching using a stack.
+		-heredoc is soooooo basic rn
+		-file aggregation basically doesnt work, causes bad
+			file descriptor access.

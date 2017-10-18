@@ -19,16 +19,17 @@
 
 # define BUFF_SIZE 1028
 
-typedef struct		s_stack_data
+typedef struct		s_s_data
 {
-	int				*data;
-	s_stack_data	prev;
+	int				data;
+	struct s_s_data	*prev;
+}					t_s_data;
 
 typedef struct		s_stack
 {
-	t_stack_data	*data;
+	t_s_data		*data;
 	int				size;
-}					t_stack
+}					t_stack;
 
 typedef struct		s_list
 {
@@ -120,7 +121,7 @@ t_tree				*new_node(int data);
 t_tree				*insert_bst(t_tree *node, int data);
 t_tree				*create_bst(int *arr, int start, int size);
 
-char				ft_getchar_mod(int fd);
+char				ft_getchar_mod(int fd, char *mod);
 char				*ft_insrtchar(char *str, int place, char c);
 char				*ft_delchar(char *str, int place);
 size_t				ft_strspn(const char *s, const char *accept);
@@ -132,10 +133,9 @@ int					ft_strlcmp(const char *s1, const char *s2, int size, int e);
 int					get_next_line(const int fd, char **line);
 char				*ft_strip_range(char *str, int min, int max);
 
-int					peek(t_stack *stack);
 int					is_empty(t_stack *stack);
-void				pop(t_stack *stack);
-void				push(int data);
-t_stack				new_stack(void);
+int					peek(t_stack *stack);
+int					pop(t_stack *stack);
+void				push(t_stack *stack, int data);
 
 #endif

@@ -74,7 +74,7 @@ t_history	*read_and_parse(t_shell *shell, t_history *hist)
 
 	check = 0;
 	hist_copy = copy_history(hist);
-	while (check != -1 && (c = ft_getchar_mod(0)))
+	while (check != -1 && (c = ft_getchar_mod(0, hist_copy->cmd)))
 		if ((check = terms_esc(c, shell, &hist_copy)) == 0 &&
 				((c > 9 && c < 14) || c == 4 || (c > 31 && c < 127)))
 			insert_char(&c, shell, hist_copy);
