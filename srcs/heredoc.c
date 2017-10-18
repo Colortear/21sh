@@ -70,7 +70,7 @@ static char	*input(char *key)
 
 	check = 0;
 	hd = NULL;
-	while (1)
+	while (write(1, ">", 1))
 	{
 		if (check)
 		{
@@ -78,8 +78,7 @@ static char	*input(char *key)
 			free(hd);
 			hd = new;
 		}
-		get_next_line(0, &tmp);
-		if (!ft_strcmp(tmp, key))
+		if (!get_next_line(0, &tmp) || !ft_strcmp(tmp, key))
 			break ;
 		new = (!check) ? ft_strdup(tmp) : ft_strjoin(hd, tmp);
 		free(hd);
