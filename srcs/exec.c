@@ -96,6 +96,8 @@ int			check_cmds(char **cmd)
 
 	type = 0;
 	check = 0;
+	if (!(*cmd))
+		return (0);
 	if (!ft_strcmp(*cmd, "echo") || !ft_strcmp(*cmd, "cd") ||
 			!ft_strcmp(*cmd, "setenv") || !ft_strcmp(*cmd, "unsetenv")
 			|| !ft_strcmp(*cmd, "env"))
@@ -123,11 +125,11 @@ void		run_execs(t_cmd *cmds)
 		cmds->aggs ? check_aggs(cmds->aggs) : 0;
 		cmds = next_cmd(cmds);
 	}
-	if (cmds && !bin && ft_strcmp(cmds->cmd, "exit"))
+	if (cmds && !bin && (!cmds->cmd || ft_strcmp(cmds->cmd, "exit")))
 	{
-		ft_putstr("21sh: bad command: ");
+		ft_putstr("21sh: ");
 		ft_putstr(cmds->cmd);
-		ft_putstr("\n\r");
+		ft_putstr(": command not found\n\r");
 	}
 	else if ((cmds = head) && bin > 1 && ft_strcmp("cd", cmds->cmd) &&
 			ft_strcmp("setenv", cmds->cmd) && ft_strcmp("unsetenv", cmds->cmd))

@@ -45,6 +45,8 @@ char	**extract_cmd(char *str, char **new, int *i, char delimit)
 	j = 0;
 	k = 0;
 	size = *i;
+	if (*i && str[*i] == delimit && (*i)++)
+		return (new);
 	tmp = new ? ft_realloc2(new) : ft_tdnew(1);
 	while (tmp && tmp[j] != 0)
 		j++;
