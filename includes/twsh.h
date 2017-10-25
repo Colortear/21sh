@@ -97,6 +97,11 @@ typedef struct			s_cmd
 	char				*hds;
 }						t_cmd;
 
+/*
+**	History struct's coordinate system is naive in that it assumes the user
+**	will not use up over 1000 lines. Dynamically allocate.
+*/
+
 typedef struct			s_history
 {
 	struct s_history	*prev;
@@ -118,16 +123,16 @@ typedef struct			s_shell
 }						t_shell;
 
 int						command(t_history *hist);
-int						set_termcap(void);
+int						set_termcap(int opt);
 int						end_termcap(void);
 int						terms_esc(char c, t_shell *shell,
-		t_history **hist);
+							t_history **hist);
 void					exit_shell(t_history *hist,
-		t_shell *shell, int err_code);
+							t_shell *shell, int err_code);
 t_history				*setup(t_shell *shell,
-		t_history *hist);
+							t_history *hist);
 void					insert_char(char *c, t_shell *shell,
-		t_history *hist);
+							t_history *hist);
 void					delete_char(t_shell *shell, t_history **hist);
 void					cleanup(t_shell *shell, t_history *hist);
 t_history				*init_hist(t_shell *shell, t_history *hist);
@@ -136,7 +141,7 @@ void					disp_prompt(void);
 t_shell					*initialize_structs(void);
 char					**freetwod(char **str);
 void					history_move(t_shell *shell,
-		t_history **hist, int dir);
+							t_history **hist, int dir);
 t_history				*add_cmd(t_shell *shell, t_history *copy);
 void					delete_return(t_history **hist);
 void					puterm(char *str);
@@ -144,7 +149,7 @@ t_history				*copy_history(t_history *hist);
 void					destroy_copy(t_history *copy);
 void					fill_x(t_history **head, t_history *hist);
 int						check_home_end(char *str, int check,
-		t_shell *shell, t_history **hist);
+							t_shell *shell, t_history **hist);
 void					set_node(t_cmd **cmd, char *tmp, int type);
 char					**twsplit(char *str);
 char					**split_quotes(char *str, char **new, int *i);

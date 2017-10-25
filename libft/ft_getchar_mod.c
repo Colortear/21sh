@@ -38,6 +38,7 @@ char		ft_getchar_mod(int fd, char *mod)
 	char		c;
 	static int	quote = 0;
 
+	c = 0;
 	if (mod)
 		quote = reload(mod);
 	if (!read(fd, &c, 1))

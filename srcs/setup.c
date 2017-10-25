@@ -38,6 +38,8 @@ t_history	*setup(t_shell *shell, t_history *hist)
 {
 	disp_prompt();
 	shell->x = 0;
+	shell->y = 0;
+	set_termcap(0);
 	shell->path = shell->path ? freetwod(shell->path) : 0;
 	shell->path = ft_strsplit(getenv("PATH"), ':');
 	//getenv("TERM") == NULL ? ft_setenv("TERM", "xterm-256color") : 0;

@@ -23,7 +23,7 @@ static void	signal_handler(int signal)
 		exit(1);
 }
 
-static void	signals(void)
+void		signals(void)
 {
 	struct sigaction	s;
 
@@ -61,7 +61,7 @@ int			main(void)
 	hist->prev = NULL;
 	shell->hist_head = NULL;
 	shell->path = NULL;
-	if (set_termcap() < 0)
+	if (set_termcap(1) < 0)
 		exit_shell(hist, shell, 1);
 	while (1)
 	{

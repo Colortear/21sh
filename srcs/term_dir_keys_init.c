@@ -73,7 +73,7 @@ int			terms_esc(char c, t_shell *shell, t_history **hist)
 	return (check);
 }
 
-int			set_termcap(void)
+int			set_termcap(int opt)
 {
 	struct termios	new;
 	char			*term;
@@ -81,7 +81,7 @@ int			set_termcap(void)
 	getenv("TERM") == NULL ? ft_setenv("TERM", "xterm-256color") : 0;
 	term = getenv("TERM");
 	tgetent(NULL, term);
-	if (tcgetattr(0, &g_old_term) < 0)
+	if (opt && tcgetattr(0, &g_old_term) < 0)
 		return (-1);
 	new = g_old_term;
 	new.c_lflag &= ~(ECHO | ICANON);

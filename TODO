@@ -1,4 +1,5 @@
 TODO:
-		-heredoc is soooooo basic rn
+		-quote interaction is effed up rn. backspace causes
+			deletions earlier in text
 		-file aggregation basically doesnt work, causes bad
 			file descriptor access.

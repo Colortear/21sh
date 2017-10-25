@@ -15,8 +15,10 @@
 t_history	*init_hist(t_shell *shell, t_history *hist)
 {
 	static int	start = 0;
+	int			i;
 	t_history	*newnode;
 
+	i = -1;
 	if (hist->prev == NULL && start == 0)
 		start = 1;
 	else if (hist->cmd)
@@ -30,7 +32,8 @@ t_history	*init_hist(t_shell *shell, t_history *hist)
 	shell->hist_head = hist;
 	hist->next = NULL;
 	hist->cmd = NULL;
-	hist->x_max[0] = 0;
+	while (i < 1000)
+		hist->x_max[++i] = 0;
 	hist->y_max = 0;
 	return (hist);
 }
