@@ -19,6 +19,8 @@
 
 # define BUFF_SIZE 1028
 
+int					g_env_change;
+
 typedef struct		s_s_data
 {
 	int				data;
@@ -113,8 +115,10 @@ int					ft_islower(int c);
 int					ft_isblank(int c);
 size_t				ft_strcspn(const char *s1, const char *s2);
 int					grab_line(const int fd, char **line);
+
 int					ft_setenv(const char *name, const char *value);
-int					ft_unsetenv(const char *name);
+void				ft_unsetenv(const char *name);
+void				clear_env(void);
 
 int					search_bst(t_tree *node, int data);
 t_tree				*new_node(int data);
@@ -137,5 +141,7 @@ int					is_empty(t_stack *stack);
 int					peek(t_stack *stack);
 int					pop(t_stack *stack);
 void				push(t_stack *stack, int data);
+t_stack				*new_stack(void);
+void				del_stack(t_stack *s);
 
 #endif

@@ -18,8 +18,7 @@ static int	reload(char *mod)
 	int		i;
 	int		ret;
 
-	s = malloc(sizeof(t_stack));
-	s->size = 0;
+	s = new_stack();
 	i = 0;
 	while (mod[i])
 	{
@@ -30,7 +29,7 @@ static int	reload(char *mod)
 		i++;
 	}
 	ret = s->size;
-	free(s);
+	del_stack(s);
 	return (ret);
 }
 

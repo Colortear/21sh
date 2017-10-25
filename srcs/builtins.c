@@ -48,15 +48,18 @@ void	run_echo(char **args)
 void	run_cd(char **path)
 {
 	char	*copy;
+	char	*tmp;
 	int		check;
 
 	copy = NULL;
 	check = 0;
+	tmp = getcwd(NULL, 0);
 	if (ft_twodlen(path) > 2 && (check = 1))
 		ft_putstr("cd: too many arguments\n\r");
 	else if (path[1] && path[1][0] == '-' && !path[1][1] && (check = 1))
 		chdir(getenv("OLDPWD"));
-	ft_setenv("OLDPWD", getcwd(NULL, 0));
+	ft_setenv("OLDPWD", tmp);
+	free(tmp);
 	if (path && path[1] && check == 0)
 	{
 		copy = path[1][0] == '~' ? ft_strjoin(getenv("HOME"), path[1] + 1) :

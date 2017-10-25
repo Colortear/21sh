@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_unsetenv(const char *name)
+void	ft_unsetenv(const char *name)
 {
 	char		**copy;
 	extern char	**environ;
@@ -28,8 +28,15 @@ int		ft_unsetenv(const char *name)
 	copy = (char **)ft_memalloc(sizeof(char *) * (len + 2));
 	len = -1;
 	while (environ[++len])
+	{
 		if (ft_strlcmp(environ[len], temp, ft_strlen(temp), 1))
-			copy[j++] = environ[len];
+			copy[j++] = ft_strdup(environ[len]);
+		if (g_env_change)
+			free(environ[len]);
+	}
+	if (g_env_change)
+		free(environ);
+	free(temp);
 	environ = copy;
-	return (0);
+	g_env_change = 1;
 }

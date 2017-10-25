@@ -25,7 +25,9 @@ void	cleanup(t_shell *shell, t_history *hist)
 		hist = prev_tmp;
 	}
 	shell->path = freetwod(shell->path);
-	shell ? free(shell) : 0;
+	if (shell)
+		free(shell);
+	clear_env();
 }
 
 char	**freetwod(char **str)

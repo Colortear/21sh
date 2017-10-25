@@ -55,6 +55,7 @@ int			main(void)
 	t_shell		*shell;
 	t_history	*hist;
 
+	g_env_change = 0;
 	shell = (t_shell *)malloc(sizeof(t_shell));
 	hist = (t_history *)malloc(sizeof(t_history));
 	hist->prev = NULL;

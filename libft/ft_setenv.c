@@ -24,7 +24,13 @@ static void	add_line(char *line)
 	new = (char **)ft_memalloc(sizeof(char *) * (len + 2));
 	len = -1;
 	while (environ[++len])
-		new[len] = environ[len];
+	{
+		new[len] = ft_strdup(environ[len]);
+		if (g_env_change)
+			free(environ[len]);
+	}
+	if (g_env_change)
+		free(environ);
 	new[len] = line;
 	new[len + 1] = 0;
 	environ = new;
@@ -48,9 +54,11 @@ int			ft_setenv(const char *name, const char *value)
 		{
 			env = environ[i];
 			environ[i] = line;
+			free(env);
 			return (0);
 		}
 	}
 	add_line(line);
+	g_env_change = 1;
 	return (0);
 }

@@ -38,3 +38,13 @@ void	push(t_stack *stack, int data)
 	stack->data = new;
 	stack->size++;
 }
+
+t_stack	*new_stack(void)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(t_stack));
+	new->data = NULL;
+	new->size = 0;
+	return (new);
+}
