@@ -45,7 +45,7 @@ void	delete_char(t_shell *shell, t_history **hist)
 	{
 		shell->x--;
 		(*hist)->x_max[shell->y]--;
-		(*hist)->cmd = ft_delchar((*hist)->cmd, shell->x);
+		(*hist)->cmd = ft_delchar((*hist)->cmd, (*hist)->chars + shell->x);
 		LEFT;
 		DEL_CHAR;
 	}
