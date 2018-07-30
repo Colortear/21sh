@@ -72,5 +72,4 @@ void		lay_pipe(t_cmd *cmds)
 	close(lpipe[1]);
 	while (waitpid(-1, NULL, 0) != -1)
 		continue ;
-//	set_termcap();
 }

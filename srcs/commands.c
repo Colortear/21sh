@@ -96,6 +96,8 @@ int			parse_pipes(char *str)
 
 	i = -1;
 	check = 0;
+	if (str[0] == '|')
+		return (0);
 	piped = ft_strsplit(str, '|');
 	c = NULL;
 	cmds = NULL;
