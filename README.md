@@ -1,11 +1,11 @@
 # 21sh
 More features added to minishell project
 
-##Compile
+## Compile
 
 To compile the shell simply run `make` in the root directory and run the binary.
 
-##Features
+## Features
 
 21sh features builtins: `cd```echo` `env` `setenv` `unsetenv`
 
