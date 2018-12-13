@@ -36,6 +36,10 @@ $(O_DIR)/%.o: ./%.c
 	@mkdir -p $(O_DIRS)
 	@$(CC) $(IFLAGS) -o $@ -c $<
 
+install: all
+	printf "installing to /usr/bin"
+	@cp ./21sh /usr/bin
+
 clean:
 	@$(RM) -r $(O_DIR)
 	@make -C ./libft clean
@@ -43,6 +47,9 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C ./libft fclean
+
+uninstall:
+	rm -rfv /usr/bin/21sh
 
 re: fclean all
 
